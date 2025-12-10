@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -433,7 +434,8 @@
             gap: 30px;
         }
 
-        .date-selection, .time-selection {
+        .date-selection,
+        .time-selection {
             display: flex;
             flex-direction: column;
         }
@@ -669,14 +671,14 @@
             margin-right: 8px;
         }
 
-        /* Confirmation Modal */
+        /* Email Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.7);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -684,6 +686,7 @@
             opacity: 0;
             visibility: hidden;
             transition: all 0.3s ease;
+            padding: 20px;
         }
 
         .modal-overlay.active {
@@ -691,18 +694,20 @@
             visibility: visible;
         }
 
-        .confirmation-modal {
+        .email-modal {
             background-color: var(--white);
             border-radius: var(--border-radius);
-            width: 90%;
-            max-width: 500px;
-            padding: 40px;
+            width: 100%;
+            max-width: 600px;
+            padding: 30px;
             text-align: center;
             transform: translateY(20px);
             transition: transform 0.3s ease;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        .modal-overlay.active .confirmation-modal {
+        .modal-overlay.active .email-modal {
             transform: translateY(0);
         }
 
@@ -732,6 +737,114 @@
             line-height: 1.6;
         }
 
+        .email-content {
+            background-color: var(--light-gray);
+            border-radius: var(--border-radius-sm);
+            padding: 20px;
+            margin-bottom: 30px;
+            text-align: left;
+            font-family: monospace;
+            white-space: pre-wrap;
+            font-size: 14px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+
+        .device-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .device-option {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 15px;
+            border: 2px solid var(--border-gray);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .device-option:hover {
+            border-color: var(--primary-blue);
+            background-color: var(--secondary-blue);
+        }
+
+        .device-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--light-gray);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--primary-blue);
+            flex-shrink: 0;
+        }
+
+        .device-info h4 {
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--dark-gray);
+        }
+
+        .device-info p {
+            color: var(--medium-gray);
+            font-size: 14px;
+        }
+
+        .manual-option {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: var(--secondary-blue);
+            border-radius: var(--border-radius-sm);
+        }
+
+        .manual-option h4 {
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--dark-gray);
+        }
+
+        .manual-option p {
+            color: var(--medium-gray);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .recipient-email {
+            background-color: var(--white);
+            padding: 10px 15px;
+            border-radius: var(--border-radius-sm);
+            font-family: monospace;
+            font-weight: 600;
+            color: var(--primary-blue);
+            margin: 10px 0;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+            margin-top: 10px;
+        }
+
+        .copy-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
         .modal-actions {
             display: flex;
             gap: 16px;
@@ -750,7 +863,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         /* Responsive Design */
@@ -758,7 +873,7 @@
             .booking-layout {
                 grid-template-columns: 1fr;
             }
-            
+
             .booking-summary-card {
                 position: static;
                 max-height: none;
@@ -769,15 +884,16 @@
             .form-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .form-group.full-width {
                 grid-column: span 1;
             }
-            
-            .stations-grid, .services-grid {
+
+            .stations-grid,
+            .services-grid {
                 grid-template-columns: 1fr;
             }
-            
+
             .datetime-grid {
                 grid-template-columns: 1fr;
                 gap: 40px;
@@ -788,25 +904,38 @@
             .time-slots {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
+
             .modal-actions {
                 flex-direction: column;
+            }
+
+            .device-option {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .email-modal {
+                padding: 20px;
             }
         }
 
         @media (max-width: 576px) {
-            .form-section, .station-section, .service-section, .datetime-section {
+
+            .form-section,
+            .station-section,
+            .service-section,
+            .datetime-section {
                 padding: 24px;
             }
-            
+
             .form-title {
                 font-size: 24px;
             }
-            
+
             .calendar-grid {
                 gap: 4px;
             }
-            
+
             .calendar-day {
                 padding: 8px 0;
                 font-size: 14px;
@@ -814,6 +943,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header>
@@ -824,7 +954,7 @@
                 </div>
                 <div class="logo-text">Speed<span>le</span></div>
             </a>
-            
+
             <div class="header-actions">
                 <a href="index.html" class="btn btn-secondary">
                     <i class="fas fa-home"></i> Back to Home
@@ -841,17 +971,19 @@
                 <!-- Personal Information Form -->
                 <div class="form-section">
                     <h1 class="form-title">Book Your Vehicle Wash</h1>
-                    <p class="form-subtitle">Fill in your details to book a wash slot. We'll send you a confirmation via email.</p>
-                    
+                    <p class="form-subtitle">Fill in your details to book a wash slot. We'll help you send a booking
+                        request via email.</p>
+
                     <div class="form-grid">
                         <div class="form-group">
                             <label class="form-label">
                                 <i class="fas fa-user"></i> Full Name
                                 <span class="required">*</span>
                             </label>
-                            <input type="text" class="form-control" id="fullName" placeholder="Enter your full name" required>
+                            <input type="text" class="form-control" id="fullName" placeholder="Enter your full name"
+                                required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="form-label">
                                 <i class="fas fa-envelope"></i> Email Address
@@ -859,15 +991,16 @@
                             </label>
                             <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="form-label">
                                 <i class="fas fa-phone"></i> Phone Number
                                 <span class="required">*</span>
                             </label>
-                            <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" required>
+                            <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number"
+                                required>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="form-label">
                                 <i class="fas fa-car"></i> Vehicle Type
@@ -882,39 +1015,42 @@
                                 <option value="motorcycle">Motorcycle</option>
                             </select>
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="form-label">
                                 <i class="fas fa-car-side"></i> Vehicle Model
                             </label>
-                            <input type="text" class="form-control" id="vehicleModel" placeholder="e.g., Toyota Camry 2021">
+                            <input type="text" class="form-control" id="vehicleModel"
+                                placeholder="e.g., Toyota Camry 2021">
                         </div>
-                        
+
                         <div class="form-group">
                             <label class="form-label">
                                 <i class="fas fa-hashtag"></i> License Plate
                             </label>
                             <input type="text" class="form-control" id="licensePlate" placeholder="Enter license plate">
                         </div>
-                        
+
                         <div class="form-group full-width">
                             <label class="form-label">
                                 <i class="fas fa-map-marker-alt"></i> Preferred Location
                                 <span class="required">*</span>
                             </label>
-                            <input type="text" class="form-control" id="location" placeholder="Enter your city or zip code" required>
+                            <input type="text" class="form-control" id="location"
+                                placeholder="Enter your city or zip code" required>
                             <div class="form-hint">We'll show you stations near this location</div>
                         </div>
-                        
+
                         <div class="form-group full-width">
                             <label class="form-label">
                                 <i class="fas fa-comment"></i> Special Instructions (Optional)
                             </label>
-                            <textarea class="form-control" id="instructions" placeholder="Any special requests or instructions for the wash service"></textarea>
+                            <textarea class="form-control" id="instructions"
+                                placeholder="Any special requests or instructions for the wash service"></textarea>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Station Selection -->
                 <div class="station-section">
                     <h2 class="section-title">Select Wash Station</h2>
@@ -940,9 +1076,9 @@
                                     <span>Full Service Available</span>
                                 </div>
                             </div>
-                            <div class="station-price">$15 - $40</div>
+                            <div class="station-price">₹400 - ₹1100</div>
                         </div>
-                        
+
                         <div class="station-card selected" data-station="aqua">
                             <div class="station-card-header">
                                 <div class="station-name">Aqua Shine Express</div>
@@ -964,9 +1100,9 @@
                                     <span>Express Service</span>
                                 </div>
                             </div>
-                            <div class="station-price">$12 - $30</div>
+                            <div class="station-price">₹300 - ₹900</div>
                         </div>
-                        
+
                         <div class="station-card" data-station="green">
                             <div class="station-card-header">
                                 <div class="station-name">Green Wash Co.</div>
@@ -988,9 +1124,9 @@
                                     <span>Eco-Friendly</span>
                                 </div>
                             </div>
-                            <div class="station-price">$20 - $50</div>
+                            <div class="station-price">₹500 - ₹1400</div>
                         </div>
-                        
+
                         <div class="station-card" data-station="quick">
                             <div class="station-card-header">
                                 <div class="station-name">Quick Wash Hub</div>
@@ -1012,11 +1148,11 @@
                                     <span>Budget Friendly</span>
                                 </div>
                             </div>
-                            <div class="station-price">$10 - $25</div>
+                            <div class="station-price">₹250 - ₹700</div>
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Service Selection -->
                 <div class="service-section">
                     <h2 class="section-title">Select Wash Service</h2>
@@ -1024,7 +1160,7 @@
                         <div class="service-card" data-service="basic">
                             <div class="service-card-header">
                                 <div class="service-name">Basic Exterior</div>
-                                <div class="service-price">$15</div>
+                                <div class="service-price">₹400</div>
                             </div>
                             <div class="service-duration">
                                 <i class="far fa-clock"></i> 15-20 minutes
@@ -1033,11 +1169,11 @@
                                 Quick exterior wash, rinse, and dry. Perfect for a basic clean.
                             </div>
                         </div>
-                        
+
                         <div class="service-card selected" data-service="standard">
                             <div class="service-card-header">
                                 <div class="service-name">Standard Wash</div>
-                                <div class="service-price">$25</div>
+                                <div class="service-price">₹700</div>
                             </div>
                             <div class="service-duration">
                                 <i class="far fa-clock"></i> 25-30 minutes
@@ -1046,11 +1182,11 @@
                                 Exterior wash, wheel cleaning, tire shine, and interior vacuum.
                             </div>
                         </div>
-                        
+
                         <div class="service-card" data-service="premium">
                             <div class="service-card-header">
                                 <div class="service-name">Premium Detail</div>
-                                <div class="service-price">$45</div>
+                                <div class="service-price">₹1200</div>
                             </div>
                             <div class="service-duration">
                                 <i class="far fa-clock"></i> 45-60 minutes
@@ -1059,11 +1195,11 @@
                                 Full interior/exterior detail with wax, window cleaning, and leather treatment.
                             </div>
                         </div>
-                        
+
                         <div class="service-card" data-service="ultimate">
                             <div class="service-card-header">
                                 <div class="service-name">Ultimate Package</div>
-                                <div class="service-price">$65</div>
+                                <div class="service-price">₹1800</div>
                             </div>
                             <div class="service-duration">
                                 <i class="far fa-clock"></i> 60-75 minutes
@@ -1074,7 +1210,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- Date & Time Selection -->
                 <div class="datetime-section">
                     <h2 class="section-title">Select Date & Time</h2>
@@ -1098,7 +1234,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="time-selection">
                             <h3 style="margin-bottom: 8px; font-weight: 600;">Select Time Slot</h3>
                             <div class="time-slots" id="timeSlots">
@@ -1108,104 +1244,123 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Right Column: Booking Summary -->
             <div class="booking-summary-card">
                 <div class="summary-header">
                     <div class="summary-title">Booking Summary</div>
                 </div>
-                
+
                 <div class="summary-content">
                     <div class="summary-item">
                         <span class="item-label">Customer Name</span>
                         <div class="item-value" id="summaryName">Not provided</div>
                     </div>
-                    
+
                     <div class="summary-item">
                         <span class="item-label">Email</span>
                         <div class="item-value" id="summaryEmail">Not provided</div>
                     </div>
-                    
+
                     <div class="summary-item">
                         <span class="item-label">Phone</span>
                         <div class="item-value" id="summaryPhone">Not provided</div>
                     </div>
-                    
+
                     <div class="summary-item">
                         <span class="item-label">Vehicle</span>
                         <div class="item-value" id="summaryVehicle">Not selected</div>
                     </div>
-                    
+
                     <div class="summary-item">
                         <span class="item-label">Selected Station</span>
                         <div class="item-value" id="summaryStation">Not selected</div>
                     </div>
-                    
+
                     <div class="summary-item">
                         <span class="item-label">Selected Service</span>
                         <div class="item-value" id="summaryService">Not selected</div>
                     </div>
-                    
+
                     <div class="summary-item">
                         <span class="item-label">Date & Time</span>
                         <div class="item-value" id="summaryDateTime">Not selected</div>
                     </div>
-                    
+
                     <div class="price-breakdown">
                         <div class="price-row">
                             <span class="price-label">Service Cost</span>
-                            <span class="price-value" id="serviceCost">$0.00</span>
+                            <span class="price-value" id="serviceCost">₹0</span>
                         </div>
                         <div class="price-row">
                             <span class="price-label">Convenience Fee</span>
-                            <span class="price-value">$1.50</span>
+                            <span class="price-value">₹30</span>
                         </div>
                         <div class="price-row">
-                            <span class="price-label">Tax (8.5%)</span>
-                            <span class="price-value" id="taxAmount">$0.00</span>
+                            <span class="price-label">GST (18%)</span>
+                            <span class="price-value" id="taxAmount">₹0</span>
                         </div>
                     </div>
-                    
+
                     <div class="total-row">
                         <span class="total-label">Total Amount</span>
-                        <span class="total-value" id="totalAmount">$0.00</span>
+                        <span class="total-value" id="totalAmount">₹0</span>
                     </div>
-                    
+
                     <div class="summary-note">
                         <i class="fas fa-info-circle"></i>
-                        After confirming, we'll open your email with a pre-filled message to book@speedle.com. Just hit send to complete your booking request.
+                        After confirming, we'll help you send an email to <strong>speedlepvtltd@gmail.com</strong> with
+                        all
+                        your booking details.
                     </div>
-                    
+
                     <button class="btn btn-success btn-large btn-block" id="confirmBookingBtn">
-                        <i class="fas fa-envelope"></i> Confirm & Send Email Request
+                        <i class="fas fa-envelope"></i> Send Booking Request
                     </button>
-                    
+
                     <p style="text-align: center; margin-top: 16px; color: var(--medium-gray); font-size: 14px;">
-                        By confirming, you'll send an email booking request to Speedle
+                        All prices are in Indian Rupees (₹)
                     </p>
                 </div>
             </div>
         </div>
     </main>
 
-    <!-- Confirmation Modal -->
-    <div class="modal-overlay" id="confirmationModal">
-        <div class="confirmation-modal">
+    <!-- Email Modal -->
+    <div class="modal-overlay" id="emailModal">
+        <div class="email-modal">
             <div class="modal-icon">
                 <i class="fas fa-envelope-open-text"></i>
             </div>
-            <h2 class="modal-title">Open Your Email</h2>
+            <h2 class="modal-title">Send Booking Request</h2>
             <p class="modal-text">
-                We've prepared your booking request. Your email client will now open with all the details pre-filled. Just click "Send" to complete your booking request.
+                We've prepared your booking request. Choose how you'd like to send it:
             </p>
-            
+
+            <div class="email-content" id="emailContent">
+                <!-- Email content will be inserted here -->
+            </div>
+
+            <div class="device-options" id="deviceOptions">
+                <!-- Options will be inserted based on device -->
+            </div>
+
+            <div class="manual-option">
+                <h4>Manual Option</h4>
+                <p>Copy the email content below and send it manually to:</p>
+                <div class="recipient-email" id="recipientEmail">speedlepvtltd</div>
+                <button class="copy-btn" id="copyEmailBtn">
+                    <i class="far fa-copy"></i> Copy Email Content
+                </button>
+            </div>
+
             <div class="modal-actions">
                 <button class="btn btn-secondary" id="cancelModalBtn">
                     <i class="fas fa-times"></i> Cancel
                 </button>
-                <a href="#" class="btn btn-primary" id="openEmailBtn" target="_blank">
-                    <i class="fas fa-envelope"></i> Open Email
-                </a>
+                <button class="btn btn-primary" id="tryAgainBtn" style="display: none;">
+                    <i class="fas fa-redo"></i> Try Again
+                </button>
             </div>
         </div>
     </div>
@@ -1216,15 +1371,15 @@
         let selectedService = 'standard';
         let selectedDate = null;
         let selectedTime = null;
-        
-        // Service prices
+
+        // Service prices in INR
         const servicePrices = {
-            basic: 15,
-            standard: 25,
-            premium: 45,
-            ultimate: 65
+            basic: 400,
+            standard: 700,
+            premium: 1200,
+            ultimate: 1800
         };
-        
+
         // Station names
         const stationNames = {
             sparkle: 'Sparkle Clean Pro',
@@ -1232,7 +1387,7 @@
             green: 'Green Wash Co.',
             quick: 'Quick Wash Hub'
         };
-        
+
         // Service names
         const serviceNames = {
             basic: 'Basic Exterior Wash',
@@ -1240,16 +1395,22 @@
             premium: 'Premium Detail',
             ultimate: 'Ultimate Package'
         };
-        
+
+        // Speedle booking email
+        const speedleEmail = 'speedlepvtltd@gmail.com';
+
         // DOM Elements
         const stationCards = document.querySelectorAll('.station-card');
         const serviceCards = document.querySelectorAll('.service-card');
         const calendarGrid = document.getElementById('calendarGrid');
         const timeSlots = document.getElementById('timeSlots');
         const confirmBookingBtn = document.getElementById('confirmBookingBtn');
-        const confirmationModal = document.getElementById('confirmationModal');
-        const openEmailBtn = document.getElementById('openEmailBtn');
-        
+        const emailModal = document.getElementById('emailModal');
+        const emailContent = document.getElementById('emailContent');
+        const deviceOptions = document.getElementById('deviceOptions');
+        const copyEmailBtn = document.getElementById('copyEmailBtn');
+        const recipientEmail = document.getElementById('recipientEmail');
+
         // Form inputs
         const fullNameInput = document.getElementById('fullName');
         const emailInput = document.getElementById('email');
@@ -1259,7 +1420,7 @@
         const licensePlateInput = document.getElementById('licensePlate');
         const locationInput = document.getElementById('location');
         const instructionsInput = document.getElementById('instructions');
-        
+
         // Summary elements
         const summaryName = document.getElementById('summaryName');
         const summaryEmail = document.getElementById('summaryEmail');
@@ -1268,14 +1429,14 @@
         const summaryStation = document.getElementById('summaryStation');
         const summaryService = document.getElementById('summaryService');
         const summaryDateTime = document.getElementById('summaryDateTime');
-        
+
         // Update booking summary when form changes
         function updateBookingSummary() {
             // Update personal info
             summaryName.textContent = fullNameInput.value || 'Not provided';
             summaryEmail.textContent = emailInput.value || 'Not provided';
             summaryPhone.textContent = phoneInput.value || 'Not provided';
-            
+
             // Update vehicle info
             const vehicleType = vehicleTypeInput.value;
             const vehicleModel = vehicleModelInput.value;
@@ -1284,85 +1445,85 @@
             } else {
                 summaryVehicle.textContent = 'Not selected';
             }
-            
+
             // Update station
             summaryStation.textContent = stationNames[selectedStation] || 'Not selected';
-            
+
             // Update service
             summaryService.textContent = serviceNames[selectedService] || 'Not selected';
-            
+
             // Update date and time
             if (selectedDate && selectedTime) {
                 summaryDateTime.textContent = `${formatDate(selectedDate)} at ${selectedTime}`;
             } else {
                 summaryDateTime.textContent = 'Not selected';
             }
-            
-            // Update price
+
+            // Update price in INR
             const serviceCost = servicePrices[selectedService] || 0;
-            document.getElementById('serviceCost').textContent = `$${serviceCost.toFixed(2)}`;
-            
-            // Update tax
-            const taxAmount = serviceCost * 0.085;
-            document.getElementById('taxAmount').textContent = `$${taxAmount.toFixed(2)}`;
-            
+            document.getElementById('serviceCost').textContent = `₹${serviceCost.toLocaleString('en-IN')}`;
+
+            // Update GST (18%)
+            const taxAmount = serviceCost * 0.18;
+            document.getElementById('taxAmount').textContent = `₹${taxAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
             // Update total
-            const totalAmount = serviceCost + 1.50 + taxAmount;
-            document.getElementById('totalAmount').textContent = `$${totalAmount.toFixed(2)}`;
+            const totalAmount = serviceCost + 30 + taxAmount;
+            document.getElementById('totalAmount').textContent = `₹${totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
         }
-        
+
         // Format date for display
         function formatDate(dateString) {
             if (!dateString) return '';
             const date = new Date(dateString);
-            return date.toLocaleDateString('en-US', { 
-                weekday: 'short', 
-                month: 'short', 
+            return date.toLocaleDateString('en-IN', {
+                weekday: 'short',
+                month: 'short',
                 day: 'numeric',
                 year: 'numeric'
             });
         }
-        
+
         // Station selection
         stationCards.forEach(card => {
             card.addEventListener('click', () => {
                 // Remove selected class from all cards
                 stationCards.forEach(c => c.classList.remove('selected'));
-                
+
                 // Add selected class to clicked card
                 card.classList.add('selected');
-                
+
                 // Update selected station
                 selectedStation = card.getAttribute('data-station');
-                
+
                 // Update booking summary
                 updateBookingSummary();
             });
         });
-        
+
         // Service selection
         serviceCards.forEach(card => {
             card.addEventListener('click', () => {
                 // Remove selected class from all cards
                 serviceCards.forEach(c => c.classList.remove('selected'));
-                
+
                 // Add selected class to clicked card
                 card.classList.add('selected');
-                
+
                 // Update selected service
                 selectedService = card.getAttribute('data-service');
-                
+
                 // Update booking summary
                 updateBookingSummary();
             });
         });
-        
+
         // Calendar generation
         function generateCalendar(year, month) {
             // Clear existing calendar days
             const existingDays = document.querySelectorAll('.calendar-day');
             existingDays.forEach(day => day.remove());
-            
+
             // Clear calendar headers if they exist (except the first 7)
             const dayHeaders = document.querySelectorAll('.calendar-day-header');
             if (dayHeaders.length > 7) {
@@ -1370,11 +1531,11 @@
                     dayHeaders[i].remove();
                 }
             }
-            
+
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
             const today = new Date();
-            
+
             // Fill empty days before the first day of the month
             for (let i = 0; i < firstDay; i++) {
                 const emptyDay = document.createElement('div');
@@ -1382,30 +1543,30 @@
                 emptyDay.textContent = '';
                 calendarGrid.appendChild(emptyDay);
             }
-            
+
             // Fill days of the month
             for (let day = 1; day <= daysInMonth; day++) {
                 const dayElement = document.createElement('div');
                 dayElement.className = 'calendar-day';
                 dayElement.textContent = day;
-                
+
                 // Set data attribute for date
                 const dateString = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
                 dayElement.setAttribute('data-date', dateString);
-                
+
                 // Check if today
                 const currentDate = new Date(year, month, day);
-                if (currentDate.getDate() === today.getDate() && 
-                    currentDate.getMonth() === today.getMonth() && 
+                if (currentDate.getDate() === today.getDate() &&
+                    currentDate.getMonth() === today.getMonth() &&
                     currentDate.getFullYear() === today.getFullYear()) {
                     dayElement.classList.add('today');
                 }
-                
+
                 // Check if selected
                 if (selectedDate === dateString) {
                     dayElement.classList.add('selected');
                 }
-                
+
                 // Disable past dates
                 if (currentDate < today) {
                     dayElement.classList.add('disabled');
@@ -1417,38 +1578,38 @@
                             document.querySelectorAll('.calendar-day').forEach(d => {
                                 d.classList.remove('selected');
                             });
-                            
+
                             // Add selected to clicked day
                             dayElement.classList.add('selected');
-                            
+
                             // Update selected date
                             selectedDate = dateString;
-                            
+
                             // Generate time slots for selected date
                             generateTimeSlots();
-                            
+
                             // Update booking summary
                             updateBookingSummary();
                         }
                     });
                 }
-                
+
                 calendarGrid.appendChild(dayElement);
             }
-            
+
             // Update month display
             const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
-                               'July', 'August', 'September', 'October', 'November', 'December'];
+                'July', 'August', 'September', 'October', 'November', 'December'];
             document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
         }
-        
+
         // Time slots generation
         function generateTimeSlots() {
             // Clear existing time slots
             timeSlots.innerHTML = '';
-            
+
             if (!selectedDate) return;
-            
+
             const timeSlotsArray = [
                 { time: '8:00 AM', available: true, peak: false },
                 { time: '9:00 AM', available: true, peak: false },
@@ -1463,12 +1624,12 @@
                 { time: '6:00 PM', available: true, peak: false },
                 { time: '7:00 PM', available: true, peak: false }
             ];
-            
+
             timeSlotsArray.forEach(slot => {
                 const slotElement = document.createElement('div');
                 slotElement.className = 'time-slot';
                 slotElement.textContent = slot.time;
-                
+
                 if (!slot.available) {
                     slotElement.classList.add('disabled');
                 } else {
@@ -1476,7 +1637,7 @@
                     if (selectedTime === slot.time) {
                         slotElement.classList.add('selected');
                     }
-                    
+
                     // Add click event for available slots
                     slotElement.addEventListener('click', () => {
                         if (!slotElement.classList.contains('disabled')) {
@@ -1484,28 +1645,28 @@
                             document.querySelectorAll('.time-slot').forEach(s => {
                                 s.classList.remove('selected');
                             });
-                            
+
                             // Add selected to clicked slot
                             slotElement.classList.add('selected');
-                            
+
                             // Update selected time
                             selectedTime = slot.time;
-                            
+
                             // Update booking summary
                             updateBookingSummary();
                         }
                     });
                 }
-                
+
                 timeSlots.appendChild(slotElement);
             });
         }
-        
+
         // Calendar navigation
         let currentDate = new Date();
         let currentYear = currentDate.getFullYear();
         let currentMonth = currentDate.getMonth();
-        
+
         document.getElementById('prevMonth').addEventListener('click', () => {
             currentMonth--;
             if (currentMonth < 0) {
@@ -1514,7 +1675,7 @@
             }
             generateCalendar(currentYear, currentMonth);
         });
-        
+
         document.getElementById('nextMonth').addEventListener('click', () => {
             currentMonth++;
             if (currentMonth > 11) {
@@ -1523,27 +1684,30 @@
             }
             generateCalendar(currentYear, currentMonth);
         });
-        
+
         // Form input listeners to update summary in real-time
         const formInputs = [
-            fullNameInput, emailInput, phoneInput, vehicleTypeInput, 
+            fullNameInput, emailInput, phoneInput, vehicleTypeInput,
             vehicleModelInput, licensePlateInput, locationInput, instructionsInput
         ];
-        
+
         formInputs.forEach(input => {
             input.addEventListener('input', updateBookingSummary);
             input.addEventListener('change', updateBookingSummary);
         });
-        
-        // Generate email content and open Gmail
+
+        // Generate email content
         function generateEmailContent() {
             const serviceCost = servicePrices[selectedService] || 0;
-            const taxAmount = serviceCost * 0.085;
-            const totalAmount = serviceCost + 1.50 + taxAmount;
-            
+            const taxAmount = serviceCost * 0.18;
+            const totalAmount = serviceCost + 30 + taxAmount;
+
             const subject = `Speedle Wash Booking Request - ${fullNameInput.value || 'Customer'}`;
-            
-            const body = `Dear Speedle Team,
+
+            const body = `To: ${speedleEmail}
+Subject: ${subject}
+
+Dear Speedle Team,
 
 I would like to book a vehicle wash with the following details:
 
@@ -1561,14 +1725,14 @@ BOOKING DETAILS:
 - Preferred Location: ${locationInput.value || 'Not provided'}
 - Selected Station: ${stationNames[selectedStation] || 'Not selected'}
 - Selected Service: ${serviceNames[selectedService] || 'Not selected'}
-- Service Cost: $${serviceCost.toFixed(2)}
+- Service Cost: ₹${serviceCost.toLocaleString('en-IN')}
 - Date & Time: ${selectedDate && selectedTime ? `${formatDate(selectedDate)} at ${selectedTime}` : 'Not selected'}
 
-PAYMENT SUMMARY:
-- Service Cost: $${serviceCost.toFixed(2)}
-- Convenience Fee: $1.50
-- Tax (8.5%): $${taxAmount.toFixed(2)}
-- Total Amount: $${totalAmount.toFixed(2)}
+PAYMENT SUMMARY (INR):
+- Service Cost: ₹${serviceCost.toLocaleString('en-IN')}
+- Convenience Fee: ₹30
+- GST (18%): ₹${taxAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+- Total Amount: ₹${totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
 
 SPECIAL INSTRUCTIONS:
 ${instructionsInput.value || 'None'}
@@ -1577,13 +1741,143 @@ Please confirm this booking and send me a confirmation with payment instructions
 
 Thank you,
 ${fullNameInput.value || 'Customer'}`;
-            
+
             return {
-                subject: encodeURIComponent(subject),
-                body: encodeURIComponent(body)
+                subject: subject,
+                body: body,
+                plainBody: body.replace(/<[^>]*>/g, '') // Remove any HTML tags for plain text
             };
         }
-        
+
+        // Create device-specific email options
+        function createEmailOptions() {
+            deviceOptions.innerHTML = '';
+
+            const emailData = generateEmailContent();
+
+            // Check if user is on mobile
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+
+            // Desktop option (Gmail web)
+            if (!isMobile) {
+                const desktopOption = document.createElement('div');
+                desktopOption.className = 'device-option';
+                desktopOption.innerHTML = `
+                    <div class="device-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <div class="device-info">
+                        <h4>Open in Gmail (Desktop)</h4>
+                        <p>Opens Gmail in a new tab with all details pre-filled</p>
+                    </div>
+                `;
+
+                desktopOption.addEventListener('click', () => {
+                    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(speedleEmail)}&su=${encodeURIComponent(emailData.subject)}&body=${encodeURIComponent(emailData.plainBody)}`;
+                    window.open(gmailUrl, '_blank');
+                    emailModal.classList.remove('active');
+                });
+
+                deviceOptions.appendChild(desktopOption);
+            }
+
+            // Mobile option (mailto link)
+            const mobileOption = document.createElement('div');
+            mobileOption.className = 'device-option';
+            mobileOption.innerHTML = `
+                <div class="device-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <div class="device-info">
+                    <h4>Open Email App (Mobile)</h4>
+                    <p>Opens your default email app with all details</p>
+                </div>
+            `;
+
+            mobileOption.addEventListener('click', () => {
+                const mailtoLink = `mailto:${speedleEmail}?subject=${encodeURIComponent(emailData.subject)}&body=${encodeURIComponent(emailData.plainBody)}`;
+
+                // Try to open mailto link
+                const mailWindow = window.open(mailtoLink, '_blank');
+
+                // Check if mailto link worked (mobile browsers sometimes block popups)
+                setTimeout(() => {
+                    if (!mailWindow || mailWindow.closed || typeof mailWindow.closed == 'undefined') {
+                        // Show manual option
+                        document.getElementById('tryAgainBtn').style.display = 'block';
+                        alert('Could not open email app automatically. Please use the manual option below to copy and paste the email.');
+                    } else {
+                        emailModal.classList.remove('active');
+                    }
+                }, 1000);
+            });
+
+            deviceOptions.appendChild(mobileOption);
+
+            // Update email content display
+            emailContent.textContent = emailData.body;
+            recipientEmail.textContent = speedleEmail;
+        }
+
+        // Copy email content to clipboard
+        copyEmailBtn.addEventListener('click', () => {
+            const emailData = generateEmailContent();
+            const textToCopy = emailData.body;
+
+            // Use modern clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(textToCopy)
+                    .then(() => {
+                        // Show success feedback
+                        const originalText = copyEmailBtn.innerHTML;
+                        copyEmailBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                        copyEmailBtn.style.backgroundColor = 'var(--success-green)';
+
+                        setTimeout(() => {
+                            copyEmailBtn.innerHTML = originalText;
+                            copyEmailBtn.style.backgroundColor = '';
+                        }, 2000);
+                    })
+                    .catch(err => {
+                        console.error('Failed to copy: ', err);
+                        fallbackCopyTextToClipboard(textToCopy);
+                    });
+            } else {
+                // Fallback for older browsers
+                fallbackCopyTextToClipboard(textToCopy);
+            }
+        });
+
+        // Fallback copy method for older browsers
+        function fallbackCopyTextToClipboard(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.left = "-999999px";
+            textArea.style.top = "-999999px";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+
+            try {
+                document.execCommand('copy');
+                // Show success feedback
+                const originalText = copyEmailBtn.innerHTML;
+                copyEmailBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                copyEmailBtn.style.backgroundColor = 'var(--success-green)';
+
+                setTimeout(() => {
+                    copyEmailBtn.innerHTML = originalText;
+                    copyEmailBtn.style.backgroundColor = '';
+                }, 2000);
+            } catch (err) {
+                console.error('Fallback copy failed: ', err);
+                alert('Failed to copy text. Please select and copy manually.');
+            }
+
+            document.body.removeChild(textArea);
+        }
+
         // Confirm booking
         confirmBookingBtn.addEventListener('click', () => {
             // Validate form
@@ -1592,78 +1886,77 @@ ${fullNameInput.value || 'Customer'}`;
                 fullNameInput.focus();
                 return;
             }
-            
+
             if (!emailInput.value) {
                 alert('Please enter your email address.');
                 emailInput.focus();
                 return;
             }
-            
+
             if (!phoneInput.value) {
                 alert('Please enter your phone number.');
                 phoneInput.focus();
                 return;
             }
-            
+
             if (!vehicleTypeInput.value) {
                 alert('Please select your vehicle type.');
                 vehicleTypeInput.focus();
                 return;
             }
-            
+
             if (!locationInput.value) {
                 alert('Please enter your preferred location.');
                 locationInput.focus();
                 return;
             }
-            
+
             if (!selectedDate || !selectedTime) {
                 alert('Please select a date and time for your wash.');
                 return;
             }
-            
-            // Generate email content
-            const email = generateEmailContent();
-            
-            // Create Gmail URL
-            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=book@speedle.com&su=${email.subject}&body=${email.body}`;
-            
-            // Set the href for the open email button
-            openEmailBtn.href = gmailUrl;
-            
-            // Show confirmation modal
-            confirmationModal.classList.add('active');
+
+            // Create email options based on device
+            createEmailOptions();
+
+            // Show email modal
+            emailModal.classList.add('active');
         });
-        
+
         // Modal actions
         document.getElementById('cancelModalBtn').addEventListener('click', () => {
-            confirmationModal.classList.remove('active');
+            emailModal.classList.remove('active');
+            document.getElementById('tryAgainBtn').style.display = 'none';
         });
-        
+
+        document.getElementById('tryAgainBtn').addEventListener('click', () => {
+            createEmailOptions();
+        });
+
         // Initialize calendar with current month
         generateCalendar(currentYear, currentMonth);
-        
+
         // Set default selected date to today
         const today = new Date();
         const todayString = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
         selectedDate = todayString;
-        
+
         // Trigger click on today's date
         setTimeout(() => {
             const todayElement = document.querySelector(`.calendar-day[data-date="${todayString}"]`);
             if (todayElement && !todayElement.classList.contains('disabled')) {
                 todayElement.click();
             }
-            
+
             // Initialize booking summary
             updateBookingSummary();
         }, 100);
-        
+
         // Auto-select a default time slot when date is selected
         setTimeout(() => {
             // Generate time slots
             generateTimeSlots();
-            
+
             // Select 2:00 PM if available
             setTimeout(() => {
                 const timeSlotElements = document.querySelectorAll('.time-slot');
@@ -1676,4 +1969,5 @@ ${fullNameInput.value || 'Customer'}`;
         }, 200);
     </script>
 </body>
+
 </html>
