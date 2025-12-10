@@ -671,7 +671,7 @@
             margin-right: 8px;
         }
 
-        /* Email Modal */
+        /* Loading Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -694,38 +694,43 @@
             visibility: visible;
         }
 
-        .email-modal {
+        .loading-modal {
             background-color: var(--white);
             border-radius: var(--border-radius);
             width: 100%;
-            max-width: 600px;
-            padding: 30px;
+            max-width: 400px;
+            padding: 40px;
             text-align: center;
             transform: translateY(20px);
             transition: transform 0.3s ease;
-            max-height: 90vh;
-            overflow-y: auto;
         }
 
-        .modal-overlay.active .email-modal {
+        .modal-overlay.active .loading-modal {
             transform: translateY(0);
         }
 
-        .modal-icon {
-            width: 80px;
-            height: 80px;
-            background-color: var(--primary-blue);
+        .loading-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid var(--secondary-blue);
+            border-top: 5px solid var(--primary-blue);
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            animation: spin 1s linear infinite;
             margin: 0 auto 24px;
-            color: var(--white);
-            font-size: 36px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .modal-title {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 700;
             margin-bottom: 16px;
             color: var(--dark-gray);
@@ -737,120 +742,6 @@
             line-height: 1.6;
         }
 
-        .email-content {
-            background-color: var(--light-gray);
-            border-radius: var(--border-radius-sm);
-            padding: 20px;
-            margin-bottom: 30px;
-            text-align: left;
-            font-family: monospace;
-            white-space: pre-wrap;
-            font-size: 14px;
-            max-height: 300px;
-            overflow-y: auto;
-        }
-
-        .device-options {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-
-        .device-option {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            padding: 15px;
-            border: 2px solid var(--border-gray);
-            border-radius: var(--border-radius-sm);
-            cursor: pointer;
-            transition: var(--transition);
-        }
-
-        .device-option:hover {
-            border-color: var(--primary-blue);
-            background-color: var(--secondary-blue);
-        }
-
-        .device-icon {
-            width: 50px;
-            height: 50px;
-            background-color: var(--light-gray);
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            color: var(--primary-blue);
-            flex-shrink: 0;
-        }
-
-        .device-info h4 {
-            font-weight: 600;
-            margin-bottom: 5px;
-            color: var(--dark-gray);
-        }
-
-        .device-info p {
-            color: var(--medium-gray);
-            font-size: 14px;
-        }
-
-        .manual-option {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: var(--secondary-blue);
-            border-radius: var(--border-radius-sm);
-        }
-
-        .manual-option h4 {
-            font-weight: 600;
-            margin-bottom: 10px;
-            color: var(--dark-gray);
-        }
-
-        .manual-option p {
-            color: var(--medium-gray);
-            font-size: 14px;
-            margin-bottom: 10px;
-        }
-
-        .recipient-email {
-            background-color: var(--white);
-            padding: 10px 15px;
-            border-radius: var(--border-radius-sm);
-            font-family: monospace;
-            font-weight: 600;
-            color: var(--primary-blue);
-            margin: 10px 0;
-            word-break: break-all;
-        }
-
-        .copy-btn {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            border: none;
-            padding: 10px 20px;
-            border-radius: var(--border-radius-sm);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            font-family: 'Inter', sans-serif;
-            width: 100%;
-            margin-top: 10px;
-        }
-
-        .copy-btn:hover {
-            background-color: var(--primary-dark);
-        }
-
-        .modal-actions {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-        }
-
         /* Loading State */
         .loading {
             display: inline-block;
@@ -860,12 +751,6 @@
             border-radius: 50%;
             border-top-color: var(--white);
             animation: spin 1s ease-in-out infinite;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
         }
 
         /* Responsive Design */
@@ -903,19 +788,6 @@
         @media (max-width: 768px) {
             .time-slots {
                 grid-template-columns: repeat(2, 1fr);
-            }
-
-            .modal-actions {
-                flex-direction: column;
-            }
-
-            .device-option {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .email-modal {
-                padding: 20px;
             }
         }
 
@@ -971,8 +843,8 @@
                 <!-- Personal Information Form -->
                 <div class="form-section">
                     <h1 class="form-title">Book Your Vehicle Wash</h1>
-                    <p class="form-subtitle">Fill in your details to book a wash slot. We'll help you send a booking
-                        request via email.</p>
+                    <p class="form-subtitle">Fill in your details to book a wash slot. We'll open Gmail with your
+                        booking details.</p>
 
                     <div class="form-grid">
                         <div class="form-group">
@@ -1008,11 +880,11 @@
                             </label>
                             <select class="form-control" id="vehicleType" required>
                                 <option value="" disabled selected>Select vehicle type</option>
-                                <option value="sedan">Sedan</option>
-                                <option value="suv">SUV</option>
-                                <option value="truck">Truck</option>
-                                <option value="van">Van</option>
-                                <option value="motorcycle">Motorcycle</option>
+                                <option value="Sedan">Sedan</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Truck">Truck</option>
+                                <option value="Van">Van</option>
+                                <option value="Motorcycle">Motorcycle</option>
                             </select>
                         </div>
 
@@ -1021,14 +893,14 @@
                                 <i class="fas fa-car-side"></i> Vehicle Model
                             </label>
                             <input type="text" class="form-control" id="vehicleModel"
-                                placeholder="e.g., Toyota Camry 2021">
+                                placeholder="e.g., Toyota Fortuner 2023">
                         </div>
 
                         <div class="form-group">
                             <label class="form-label">
                                 <i class="fas fa-hashtag"></i> License Plate
                             </label>
-                            <input type="text" class="form-control" id="licensePlate" placeholder="Enter license plate">
+                            <input type="text" class="form-control" id="licensePlate" placeholder="e.g., JK15A-1234">
                         </div>
 
                         <div class="form-group full-width">
@@ -1036,8 +908,8 @@
                                 <i class="fas fa-map-marker-alt"></i> Preferred Location
                                 <span class="required">*</span>
                             </label>
-                            <input type="text" class="form-control" id="location"
-                                placeholder="Enter your city or zip code" required>
+                            <input type="text" class="form-control" id="location" placeholder="Enter your city or area"
+                                required>
                             <div class="form-hint">We'll show you stations near this location</div>
                         </div>
 
@@ -1065,7 +937,7 @@
                             <div class="station-details">
                                 <div class="station-detail">
                                     <i class="fas fa-map-marker-alt"></i>
-                                    <span>2.1 miles away</span>
+                                    <span>2.1 km away</span>
                                 </div>
                                 <div class="station-detail">
                                     <i class="fas fa-clock"></i>
@@ -1089,7 +961,7 @@
                             <div class="station-details">
                                 <div class="station-detail">
                                     <i class="fas fa-map-marker-alt"></i>
-                                    <span>3.5 miles away</span>
+                                    <span>3.5 km away</span>
                                 </div>
                                 <div class="station-detail">
                                     <i class="fas fa-clock"></i>
@@ -1113,7 +985,7 @@
                             <div class="station-details">
                                 <div class="station-detail">
                                     <i class="fas fa-map-marker-alt"></i>
-                                    <span>1.8 miles away</span>
+                                    <span>1.8 km away</span>
                                 </div>
                                 <div class="station-detail">
                                     <i class="fas fa-clock"></i>
@@ -1137,7 +1009,7 @@
                             <div class="station-details">
                                 <div class="station-detail">
                                     <i class="fas fa-map-marker-alt"></i>
-                                    <span>4.2 miles away</span>
+                                    <span>4.2 km away</span>
                                 </div>
                                 <div class="station-detail">
                                     <i class="fas fa-clock"></i>
@@ -1219,7 +1091,7 @@
                             <h3 style="margin-bottom: 8px; font-weight: 600;">Select Date</h3>
                             <div class="calendar" id="calendar">
                                 <div class="calendar-header">
-                                    <div class="current-month" id="currentMonth">November 2023</div>
+                                    <div class="current-month" id="currentMonth">December 2025</div>
                                     <div class="calendar-nav">
                                         <button class="calendar-nav-btn" id="prevMonth">
                                             <i class="fas fa-chevron-left"></i>
@@ -1309,9 +1181,7 @@
 
                     <div class="summary-note">
                         <i class="fas fa-info-circle"></i>
-                        After confirming, we'll help you send an email to <strong>speedlepvtltd@gmail.com</strong> with
-                        all
-                        your booking details.
+                        Clicking "Send Booking Request" will open Gmail with all your details pre-filled.
                     </div>
 
                     <button class="btn btn-success btn-large btn-block" id="confirmBookingBtn">
@@ -1326,42 +1196,14 @@
         </div>
     </main>
 
-    <!-- Email Modal -->
-    <div class="modal-overlay" id="emailModal">
-        <div class="email-modal">
-            <div class="modal-icon">
-                <i class="fas fa-envelope-open-text"></i>
-            </div>
-            <h2 class="modal-title">Send Booking Request</h2>
-            <p class="modal-text">
-                We've prepared your booking request. Choose how you'd like to send it:
+    <!-- Loading Modal -->
+    <div class="modal-overlay" id="loadingModal">
+        <div class="loading-modal">
+            <div class="loading-spinner"></div>
+            <h2 class="modal-title" id="modalTitle">Opening Gmail...</h2>
+            <p class="modal-text" id="modalText">
+                Preparing your booking details and opening Gmail. Please wait...
             </p>
-
-            <div class="email-content" id="emailContent">
-                <!-- Email content will be inserted here -->
-            </div>
-
-            <div class="device-options" id="deviceOptions">
-                <!-- Options will be inserted based on device -->
-            </div>
-
-            <div class="manual-option">
-                <h4>Manual Option</h4>
-                <p>Copy the email content below and send it manually to:</p>
-                <div class="recipient-email" id="recipientEmail">speedlepvtltd</div>
-                <button class="copy-btn" id="copyEmailBtn">
-                    <i class="far fa-copy"></i> Copy Email Content
-                </button>
-            </div>
-
-            <div class="modal-actions">
-                <button class="btn btn-secondary" id="cancelModalBtn">
-                    <i class="fas fa-times"></i> Cancel
-                </button>
-                <button class="btn btn-primary" id="tryAgainBtn" style="display: none;">
-                    <i class="fas fa-redo"></i> Try Again
-                </button>
-            </div>
         </div>
     </div>
 
@@ -1396,8 +1238,8 @@
             ultimate: 'Ultimate Package'
         };
 
-        // Speedle booking email
-        const speedleEmail = 'speedlepvtltd@gmail.com';
+        // Speedle booking email - Updated as requested
+        const speedleEmail = 'SpeedlePvtLtd@gmail.com';
 
         // DOM Elements
         const stationCards = document.querySelectorAll('.station-card');
@@ -1405,11 +1247,9 @@
         const calendarGrid = document.getElementById('calendarGrid');
         const timeSlots = document.getElementById('timeSlots');
         const confirmBookingBtn = document.getElementById('confirmBookingBtn');
-        const emailModal = document.getElementById('emailModal');
-        const emailContent = document.getElementById('emailContent');
-        const deviceOptions = document.getElementById('deviceOptions');
-        const copyEmailBtn = document.getElementById('copyEmailBtn');
-        const recipientEmail = document.getElementById('recipientEmail');
+        const loadingModal = document.getElementById('loadingModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalText = document.getElementById('modalText');
 
         // Form inputs
         const fullNameInput = document.getElementById('fullName');
@@ -1430,6 +1270,25 @@
         const summaryService = document.getElementById('summaryService');
         const summaryDateTime = document.getElementById('summaryDateTime');
 
+        // Device detection
+        function detectDevice() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+            // Check for mobile devices
+            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
+
+            // Check for specific mobile OS
+            const isAndroid = /Android/i.test(userAgent);
+            const isIOS = /iPhone|iPad|iPod/i.test(userAgent);
+
+            return {
+                isMobile: isMobile,
+                isAndroid: isAndroid,
+                isIOS: isIOS,
+                isDesktop: !isMobile
+            };
+        }
+
         // Update booking summary when form changes
         function updateBookingSummary() {
             // Update personal info
@@ -1441,7 +1300,7 @@
             const vehicleType = vehicleTypeInput.value;
             const vehicleModel = vehicleModelInput.value;
             if (vehicleType) {
-                summaryVehicle.textContent = `${vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1)}${vehicleModel ? ' - ' + vehicleModel : ''}`;
+                summaryVehicle.textContent = `${vehicleType}${vehicleModel ? ' - ' + vehicleModel : ''}`;
             } else {
                 summaryVehicle.textContent = 'Not selected';
             }
@@ -1479,6 +1338,18 @@
             return date.toLocaleDateString('en-IN', {
                 weekday: 'short',
                 month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+
+        // Format date for email (more formal)
+        function formatDateForEmail(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-IN', {
+                weekday: 'long',
+                month: 'long',
                 day: 'numeric',
                 year: 'numeric'
             });
@@ -1696,186 +1567,131 @@
             input.addEventListener('change', updateBookingSummary);
         });
 
-        // Generate email content
+        // Generate email content with SIMPLER format (no emojis to avoid encoding issues)
         function generateEmailContent() {
             const serviceCost = servicePrices[selectedService] || 0;
             const taxAmount = serviceCost * 0.18;
             const totalAmount = serviceCost + 30 + taxAmount;
 
-            const subject = `Speedle Wash Booking Request - ${fullNameInput.value || 'Customer'}`;
+            // Simple subject line
+            const subject = `Speedle Vehicle Wash Booking - ${fullNameInput.value || 'Customer'} - ${formatDateForEmail(selectedDate)}`;
 
-            const body = `To: ${speedleEmail}
-Subject: ${subject}
+            // SIMPLE email body without special characters that cause encoding issues
+            const body = `BOOKING REQUEST - SPEEDLE VEHICLE WASH
+===============================================================
 
 Dear Speedle Team,
 
-I would like to book a vehicle wash with the following details:
+I would like to request a vehicle wash booking with the following details:
 
-CUSTOMER INFORMATION:
-- Name: ${fullNameInput.value || 'Not provided'}
-- Email: ${emailInput.value || 'Not provided'}
-- Phone: ${phoneInput.value || 'Not provided'}
+CUSTOMER INFORMATION
+===============================================================
+• Full Name: ${fullNameInput.value || 'Not provided'}
+• Email Address: ${emailInput.value || 'Not provided'}
+• Phone Number: ${phoneInput.value || 'Not provided'}
 
-VEHICLE DETAILS:
-- Vehicle Type: ${vehicleTypeInput.value || 'Not selected'}
-- Vehicle Model: ${vehicleModelInput.value || 'Not provided'}
-- License Plate: ${licensePlateInput.value || 'Not provided'}
+VEHICLE DETAILS
+===============================================================
+• Vehicle Type: ${vehicleTypeInput.value || 'Not selected'}
+• Vehicle Model: ${vehicleModelInput.value || 'Not provided'}
+• License Plate: ${licensePlateInput.value || 'Not provided'}
 
-BOOKING DETAILS:
-- Preferred Location: ${locationInput.value || 'Not provided'}
-- Selected Station: ${stationNames[selectedStation] || 'Not selected'}
-- Selected Service: ${serviceNames[selectedService] || 'Not selected'}
-- Service Cost: ₹${serviceCost.toLocaleString('en-IN')}
-- Date & Time: ${selectedDate && selectedTime ? `${formatDate(selectedDate)} at ${selectedTime}` : 'Not selected'}
+BOOKING DETAILS
+===============================================================
+• Preferred Location: ${locationInput.value || 'Not provided'}
+• Selected Station: ${stationNames[selectedStation] || 'Not selected'}
+• Selected Service: ${serviceNames[selectedService] || 'Not selected'}
+• Date: ${selectedDate ? formatDateForEmail(selectedDate) : 'Not selected'}
+• Time Slot: ${selectedTime || 'Not selected'}
+• Service Cost: ₹${serviceCost.toLocaleString('en-IN')}
 
-PAYMENT SUMMARY (INR):
-- Service Cost: ₹${serviceCost.toLocaleString('en-IN')}
-- Convenience Fee: ₹30
-- GST (18%): ₹${taxAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
-- Total Amount: ₹${totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+PAYMENT SUMMARY (INR)
+===============================================================
+• Service Cost: ₹${serviceCost.toLocaleString('en-IN')}
+• Convenience Fee: ₹30
+• GST (18%): ₹${taxAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+• ===============================================================
+• TOTAL AMOUNT: ₹${totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
 
-SPECIAL INSTRUCTIONS:
-${instructionsInput.value || 'None'}
+SPECIAL INSTRUCTIONS
+===============================================================
+${instructionsInput.value || 'No special instructions provided.'}
 
-Please confirm this booking and send me a confirmation with payment instructions.
+===============================================================
+Please:
+1. Confirm the availability of this booking slot
+2. Provide payment instructions
+3. Send a confirmation email with booking details
 
+===============================================================
 Thank you,
-${fullNameInput.value || 'Customer'}`;
+Team Speedle Booking System
+
+===============================================================
+Booked via Speedle Platform | Instant Vehicle Wash Booking
+Contact: ${speedleEmail}
+24/7 Booking Support`;
 
             return {
                 subject: subject,
-                body: body,
-                plainBody: body.replace(/<[^>]*>/g, '') // Remove any HTML tags for plain text
+                body: body
             };
         }
 
-        // Create device-specific email options
-        function createEmailOptions() {
-            deviceOptions.innerHTML = '';
-
+        // Open Gmail based on device - FIXED URL ENCODING
+        function openGmailForDevice() {
+            const device = detectDevice();
             const emailData = generateEmailContent();
 
-            // Check if user is on mobile
-            const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            // Use proper URL encoding
+            const encodedSubject = encodeURIComponent(emailData.subject);
+            const encodedBody = encodeURIComponent(emailData.body);
 
-            // Desktop option (Gmail web)
-            if (!isMobile) {
-                const desktopOption = document.createElement('div');
-                desktopOption.className = 'device-option';
-                desktopOption.innerHTML = `
-                    <div class="device-icon">
-                        <i class="fas fa-desktop"></i>
-                    </div>
-                    <div class="device-info">
-                        <h4>Open in Gmail (Desktop)</h4>
-                        <p>Opens Gmail in a new tab with all details pre-filled</p>
-                    </div>
-                `;
+            if (device.isDesktop) {
+                // Desktop - Open Gmail web interface
+                // Use shorter URL to avoid 400 error
+                const gmailUrl = `https://mail.google.com/mail/?view=cm&to=${speedleEmail}&su=${encodedSubject}&body=${encodedBody}`;
 
-                desktopOption.addEventListener('click', () => {
-                    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(speedleEmail)}&su=${encodeURIComponent(emailData.subject)}&body=${encodeURIComponent(emailData.plainBody)}`;
+                // Update modal text for desktop
+                modalTitle.textContent = 'Opening Gmail...';
+                modalText.textContent = 'Opening Gmail web interface with your booking details.';
+
+                // Try to open Gmail
+                setTimeout(() => {
                     window.open(gmailUrl, '_blank');
-                    emailModal.classList.remove('active');
-                });
+                    setTimeout(() => {
+                        loadingModal.classList.remove('active');
+                    }, 1000);
+                }, 500);
 
-                deviceOptions.appendChild(desktopOption);
-            }
+            } else if (device.isMobile) {
+                // Mobile - Use mailto for better compatibility
+                const mailtoUrl = `mailto:${speedleEmail}?subject=${encodedSubject}&body=${encodedBody}`;
 
-            // Mobile option (mailto link)
-            const mobileOption = document.createElement('div');
-            mobileOption.className = 'device-option';
-            mobileOption.innerHTML = `
-                <div class="device-icon">
-                    <i class="fas fa-mobile-alt"></i>
-                </div>
-                <div class="device-info">
-                    <h4>Open Email App (Mobile)</h4>
-                    <p>Opens your default email app with all details</p>
-                </div>
-            `;
+                // Update modal text for mobile
+                modalTitle.textContent = 'Opening Email App...';
+                modalText.textContent = 'Opening email app on your device.';
 
-            mobileOption.addEventListener('click', () => {
-                const mailtoLink = `mailto:${speedleEmail}?subject=${encodeURIComponent(emailData.subject)}&body=${encodeURIComponent(emailData.plainBody)}`;
+                // Try to open mail app
+                const mailWindow = window.open(mailtoUrl, '_blank');
 
-                // Try to open mailto link
-                const mailWindow = window.open(mailtoLink, '_blank');
-
-                // Check if mailto link worked (mobile browsers sometimes block popups)
+                // Check if mail app opened
                 setTimeout(() => {
                     if (!mailWindow || mailWindow.closed || typeof mailWindow.closed == 'undefined') {
-                        // Show manual option
-                        document.getElementById('tryAgainBtn').style.display = 'block';
-                        alert('Could not open email app automatically. Please use the manual option below to copy and paste the email.');
+                        // Mail app didn't open
+                        modalTitle.textContent = 'Unable to Open Email';
+                        modalText.textContent = 'Please open your email app and send to SpeedlePvtLtd@gmail.com';
+                        setTimeout(() => {
+                            loadingModal.classList.remove('active');
+                            alert('Could not open email app automatically. Please send an email to SpeedlePvtLtd@gmail.com with your booking details.');
+                        }, 2000);
                     } else {
-                        emailModal.classList.remove('active');
+                        setTimeout(() => {
+                            loadingModal.classList.remove('active');
+                        }, 1000);
                     }
                 }, 1000);
-            });
-
-            deviceOptions.appendChild(mobileOption);
-
-            // Update email content display
-            emailContent.textContent = emailData.body;
-            recipientEmail.textContent = speedleEmail;
-        }
-
-        // Copy email content to clipboard
-        copyEmailBtn.addEventListener('click', () => {
-            const emailData = generateEmailContent();
-            const textToCopy = emailData.body;
-
-            // Use modern clipboard API
-            if (navigator.clipboard && window.isSecureContext) {
-                navigator.clipboard.writeText(textToCopy)
-                    .then(() => {
-                        // Show success feedback
-                        const originalText = copyEmailBtn.innerHTML;
-                        copyEmailBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                        copyEmailBtn.style.backgroundColor = 'var(--success-green)';
-
-                        setTimeout(() => {
-                            copyEmailBtn.innerHTML = originalText;
-                            copyEmailBtn.style.backgroundColor = '';
-                        }, 2000);
-                    })
-                    .catch(err => {
-                        console.error('Failed to copy: ', err);
-                        fallbackCopyTextToClipboard(textToCopy);
-                    });
-            } else {
-                // Fallback for older browsers
-                fallbackCopyTextToClipboard(textToCopy);
             }
-        });
-
-        // Fallback copy method for older browsers
-        function fallbackCopyTextToClipboard(text) {
-            const textArea = document.createElement("textarea");
-            textArea.value = text;
-            textArea.style.position = "fixed";
-            textArea.style.left = "-999999px";
-            textArea.style.top = "-999999px";
-            document.body.appendChild(textArea);
-            textArea.focus();
-            textArea.select();
-
-            try {
-                document.execCommand('copy');
-                // Show success feedback
-                const originalText = copyEmailBtn.innerHTML;
-                copyEmailBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
-                copyEmailBtn.style.backgroundColor = 'var(--success-green)';
-
-                setTimeout(() => {
-                    copyEmailBtn.innerHTML = originalText;
-                    copyEmailBtn.style.backgroundColor = '';
-                }, 2000);
-            } catch (err) {
-                console.error('Fallback copy failed: ', err);
-                alert('Failed to copy text. Please select and copy manually.');
-            }
-
-            document.body.removeChild(textArea);
         }
 
         // Confirm booking
@@ -1916,57 +1732,71 @@ ${fullNameInput.value || 'Customer'}`;
                 return;
             }
 
-            // Create email options based on device
-            createEmailOptions();
+            // Detect device and update modal text
+            const device = detectDevice();
+            if (device.isDesktop) {
+                modalTitle.textContent = 'Opening Gmail...';
+                modalText.textContent = 'Preparing your booking details and opening Gmail web interface.';
+            } else {
+                modalTitle.textContent = 'Opening Email App...';
+                modalText.textContent = 'Preparing your booking details and opening your email app.';
+            }
 
-            // Show email modal
-            emailModal.classList.add('active');
-        });
+            // Show loading modal
+            loadingModal.classList.add('active');
 
-        // Modal actions
-        document.getElementById('cancelModalBtn').addEventListener('click', () => {
-            emailModal.classList.remove('active');
-            document.getElementById('tryAgainBtn').style.display = 'none';
-        });
-
-        document.getElementById('tryAgainBtn').addEventListener('click', () => {
-            createEmailOptions();
+            // Simulate processing delay
+            setTimeout(() => {
+                openGmailForDevice();
+            }, 1500);
         });
 
         // Initialize calendar with current month
         generateCalendar(currentYear, currentMonth);
 
-        // Set default selected date to today
-        const today = new Date();
-        const todayString = `${today.getFullYear()}-${(today.getMonth() + 1).toString().padStart(2, '0')}-${today.getDate().toString().padStart(2, '0')}`;
-        selectedDate = todayString;
-
-        // Trigger click on today's date
+        // Set default values for testing
         setTimeout(() => {
-            const todayElement = document.querySelector(`.calendar-day[data-date="${todayString}"]`);
-            if (todayElement && !todayElement.classList.contains('disabled')) {
-                todayElement.click();
-            }
+            // Set test values
+            fullNameInput.value = "ASIF NAZIR";
+            emailInput.value = "ASIFNAZIRMANTOO@GMAIL.COM";
+            phoneInput.value = "08082042836";
+            vehicleTypeInput.value = "SUV";
+            locationInput.value = "Shopian";
 
-            // Initialize booking summary
-            updateBookingSummary();
-        }, 100);
+            // Set date to December 10, 2025
+            const testDate = new Date(2025, 11, 10); // December 10, 2025
+            const testDateString = `${testDate.getFullYear()}-${(testDate.getMonth() + 1).toString().padStart(2, '0')}-${testDate.getDate().toString().padStart(2, '0')}`;
 
-        // Auto-select a default time slot when date is selected
-        setTimeout(() => {
-            // Generate time slots
-            generateTimeSlots();
+            // Update the calendar to show December 2025
+            currentYear = 2025;
+            currentMonth = 11; // December (0-indexed)
+            generateCalendar(currentYear, currentMonth);
 
-            // Select 2:00 PM if available
+            // Wait for calendar to render, then select the date
             setTimeout(() => {
-                const timeSlotElements = document.querySelectorAll('.time-slot');
-                timeSlotElements.forEach(slot => {
-                    if (slot.textContent === '2:00 PM' && !slot.classList.contains('disabled')) {
-                        slot.click();
-                    }
-                });
-            }, 200);
-        }, 200);
+                selectedDate = testDateString;
+                const dateElement = document.querySelector(`.calendar-day[data-date="${testDateString}"]`);
+                if (dateElement && !dateElement.classList.contains('disabled')) {
+                    dateElement.click();
+                }
+
+                // Update booking summary
+                updateBookingSummary();
+
+                // Select time slot
+                setTimeout(() => {
+                    generateTimeSlots();
+                    setTimeout(() => {
+                        const timeSlotElements = document.querySelectorAll('.time-slot');
+                        timeSlotElements.forEach(slot => {
+                            if (slot.textContent === '2:00 PM' && !slot.classList.contains('disabled')) {
+                                slot.click();
+                            }
+                        });
+                    }, 200);
+                }, 200);
+            }, 300);
+        }, 500);
     </script>
 </body>
 
