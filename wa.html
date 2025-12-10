@@ -1,1 +1,1786 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Wash - Speedle</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <style>
+        :root {
+            --primary-blue: #0066FF;
+            --primary-dark: #0052CC;
+            --secondary-blue: #E6F0FF;
+            --accent-teal: #00C9B7;
+            --success-green: #10B981;
+            --whatsapp-green: #25D366;
+            --dark-gray: #1A1A1A;
+            --medium-gray: #4A5568;
+            --light-gray: #EDF2F7;
+            --border-gray: #E2E8F0;
+            --white: #FFFFFF;
+            --border-radius: 16px;
+            --border-radius-sm: 8px;
+            --box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            --box-shadow-lg: 0 20px 40px rgba(0, 102, 255, 0.1);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            --header-height: 80px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--dark-gray);
+            line-height: 1.6;
+            background-color: var(--white);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            outline: none;
+            font-family: 'Inter', sans-serif;
+            gap: 10px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary-blue);
+            border: 2px solid var(--primary-blue);
+            padding: 10px 20px;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .btn-large {
+            padding: 16px 32px;
+            font-size: 18px;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn-whatsapp {
+            background-color: var(--whatsapp-green);
+            color: var(--white);
+        }
+
+        .btn-whatsapp:hover {
+            background-color: #1da851;
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+
+        /* Header Styles - Fixed for Mobile */
+        header {
+            position: sticky;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
+            background-color: var(--white);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 100%;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-teal));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 18px;
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--dark-gray);
+        }
+
+        .logo-text span {
+            color: var(--primary-blue);
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* Booking Layout */
+        .booking-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            padding: 30px 0;
+            min-height: calc(100vh - var(--header-height));
+        }
+
+        /* Form Section */
+        .form-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .form-title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--dark-gray);
+        }
+
+        .form-subtitle {
+            color: var(--medium-gray);
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+
+        .form-label {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--dark-gray);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .required {
+            color: #EF4444;
+        }
+
+        .form-control {
+            padding: 14px;
+            border: 2px solid var(--border-gray);
+            border-radius: var(--border-radius-sm);
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: var(--dark-gray);
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+        }
+
+        .form-control::placeholder {
+            color: #A0AEC0;
+        }
+
+        textarea.form-control {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-hint {
+            font-size: 12px;
+            color: var(--medium-gray);
+            margin-top: 6px;
+        }
+
+        /* Station Selection */
+        .station-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--dark-gray);
+        }
+
+        .stations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .station-card {
+            border: 2px solid var(--border-gray);
+            border-radius: var(--border-radius-sm);
+            padding: 20px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .station-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .station-card.selected {
+            border-color: var(--primary-blue);
+            background-color: var(--secondary-blue);
+        }
+
+        .station-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .station-name {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--dark-gray);
+        }
+
+        .station-rating {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            color: var(--medium-gray);
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .station-rating i {
+            color: #FFC107;
+        }
+
+        .station-details {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .station-detail {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--medium-gray);
+            font-size: 14px;
+        }
+
+        .station-detail i {
+            color: var(--primary-blue);
+            width: 16px;
+        }
+
+        .station-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        /* Service Selection */
+        .service-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+            margin-bottom: 20px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+        }
+
+        .service-card {
+            border: 2px solid var(--border-gray);
+            border-radius: var(--border-radius-sm);
+            padding: 20px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+
+        .service-card.selected {
+            border-color: var(--primary-blue);
+            background-color: var(--secondary-blue);
+        }
+
+        .service-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 12px;
+        }
+
+        .service-name {
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--dark-gray);
+        }
+
+        .service-price {
+            font-weight: 700;
+            font-size: 20px;
+            color: var(--primary-blue);
+        }
+
+        .service-duration {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--medium-gray);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .service-description {
+            color: var(--medium-gray);
+            font-size: 14px;
+        }
+
+        /* Date & Time Selection */
+        .datetime-section {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+        }
+
+        .datetime-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+
+        .date-selection,
+        .time-selection {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calendar {
+            border: 2px solid var(--border-gray);
+            border-radius: var(--border-radius-sm);
+            padding: 16px;
+            margin-top: 12px;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .current-month {
+            font-weight: 600;
+            font-size: 16px;
+            color: var(--dark-gray);
+        }
+
+        .calendar-nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .calendar-nav-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--light-gray);
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .calendar-nav-btn:hover {
+            background-color: var(--secondary-blue);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 6px;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-weight: 600;
+            color: var(--medium-gray);
+            padding: 8px 0;
+            font-size: 12px;
+        }
+
+        .calendar-day {
+            text-align: center;
+            padding: 10px 0;
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .calendar-day:hover {
+            background-color: var(--light-gray);
+        }
+
+        .calendar-day.selected {
+            background-color: var(--primary-blue);
+            color: var(--white);
+        }
+
+        .calendar-day.disabled {
+            color: #CBD5E0;
+            cursor: not-allowed;
+        }
+
+        .calendar-day.today {
+            background-color: var(--secondary-blue);
+            color: var(--primary-blue);
+            font-weight: 700;
+        }
+
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .time-slot {
+            padding: 12px;
+            text-align: center;
+            border: 2px solid var(--border-gray);
+            border-radius: var(--border-radius-sm);
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .time-slot:hover {
+            border-color: var(--primary-blue);
+            background-color: var(--secondary-blue);
+        }
+
+        .time-slot.selected {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            border-color: var(--primary-blue);
+        }
+
+        .time-slot.disabled {
+            background-color: var(--light-gray);
+            color: #A0AEC0;
+            cursor: not-allowed;
+            text-decoration: line-through;
+        }
+
+        /* Booking Summary */
+        .booking-summary-card {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            padding: 24px;
+            position: sticky;
+            top: calc(var(--header-height) + 20px);
+            max-height: calc(100vh - var(--header-height) - 40px);
+            overflow-y: auto;
+        }
+
+        .summary-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--border-gray);
+        }
+
+        .summary-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark-gray);
+        }
+
+        .summary-item {
+            margin-bottom: 20px;
+        }
+
+        .item-label {
+            font-size: 13px;
+            color: var(--medium-gray);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .item-value {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--dark-gray);
+        }
+
+        .item-value.empty {
+            color: #A0AEC0;
+            font-style: italic;
+        }
+
+        .price-breakdown {
+            border-top: 1px solid var(--border-gray);
+            border-bottom: 1px solid var(--border-gray);
+            padding: 16px 0;
+            margin: 16px 0;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .price-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .price-label {
+            color: var(--medium-gray);
+            font-size: 14px;
+        }
+
+        .price-value {
+            font-weight: 500;
+            font-size: 14px;
+        }
+
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 2px solid var(--border-gray);
+        }
+
+        .total-label {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--dark-gray);
+        }
+
+        .total-value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .summary-note {
+            background-color: var(--secondary-blue);
+            border-radius: var(--border-radius-sm);
+            padding: 14px;
+            margin: 16px 0;
+            font-size: 13px;
+            color: var(--medium-gray);
+        }
+
+        .summary-note i {
+            color: var(--primary-blue);
+            margin-right: 6px;
+        }
+
+        .whatsapp-note {
+            background-color: rgba(37, 211, 102, 0.1);
+            border-left: 4px solid var(--whatsapp-green);
+        }
+
+        .whatsapp-note i {
+            color: var(--whatsapp-green);
+        }
+
+        /* Loading Modal */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            padding: 20px;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .loading-modal {
+            background-color: var(--white);
+            border-radius: var(--border-radius);
+            width: 100%;
+            max-width: 400px;
+            padding: 30px;
+            text-align: center;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .loading-modal {
+            transform: translateY(0);
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--secondary-blue);
+            border-top: 4px solid var(--whatsapp-green);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .modal-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: var(--dark-gray);
+        }
+
+        .modal-text {
+            color: var(--medium-gray);
+            margin-bottom: 20px;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* Loading State */
+        .loading {
+            display: inline-block;
+            width: 18px;
+            height: 18px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--white);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        /* Responsive Design - Improved Mobile Fixes */
+        @media (max-width: 1200px) {
+            .booking-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .booking-summary-card {
+                position: static;
+                max-height: none;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full-width {
+                grid-column: span 1;
+            }
+
+            .stations-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .datetime-grid {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-actions .btn-secondary {
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            .logo-icon {
+                width: 32px;
+                height: 32px;
+                font-size: 16px;
+            }
+
+            .logo-text {
+                font-size: 20px;
+            }
+        }
+
+        @media (max-width: 576px) {
+
+            .form-section,
+            .station-section,
+            .service-section,
+            .datetime-section {
+                padding: 20px;
+            }
+
+            .form-title {
+                font-size: 22px;
+            }
+
+            .calendar-grid {
+                gap: 4px;
+            }
+
+            .calendar-day {
+                padding: 8px 0;
+                font-size: 12px;
+            }
+
+            .container {
+                padding: 0 16px;
+            }
+
+            .header-actions .btn-secondary {
+                padding: 6px 12px;
+                font-size: 13px;
+            }
+
+            .logo-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 14px;
+                margin-right: 8px;
+            }
+
+            .logo-text {
+                font-size: 18px;
+            }
+
+            .btn-large {
+                padding: 14px 24px;
+                font-size: 16px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            .header-actions .btn-secondary {
+                padding: 5px 10px;
+                font-size: 12px;
+                min-width: 90px;
+            }
+
+            .logo-text {
+                font-size: 16px;
+            }
+
+            .btn {
+                padding: 10px 16px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-car"></i>
+                </div>
+                <div class="logo-text">Speed<span>le</span></div>
+            </a>
+
+            <div class="header-actions">
+                <a href="index.html" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Booking Content -->
+    <main class="container">
+        <div class="booking-layout">
+            <!-- Left Column: Booking Form -->
+            <div class="booking-form">
+                <!-- Personal Information Form -->
+                <div class="form-section">
+                    <h1 class="form-title">Book Your Vehicle Wash</h1>
+                    <p class="form-subtitle">Fill in your details to book a wash slot. We'll open WhatsApp with your
+                        booking details.</p>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-user"></i> Full Name
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="fullName" placeholder="Enter your full name"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-envelope"></i> Email Address
+                                <span class="required">*</span>
+                            </label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-phone"></i> Phone Number
+                                <span class="required">*</span>
+                            </label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number"
+                                required>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-car"></i> Vehicle Type
+                                <span class="required">*</span>
+                            </label>
+                            <select class="form-control" id="vehicleType" required>
+                                <option value="" disabled selected>Select vehicle type</option>
+                                <option value="Sedan">Sedan</option>
+                                <option value="SUV">SUV</option>
+                                <option value="Truck">Truck</option>
+                                <option value="Van">Van</option>
+                                <option value="Motorcycle">Motorcycle</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-car-side"></i> Vehicle Model
+                            </label>
+                            <input type="text" class="form-control" id="vehicleModel"
+                                placeholder="e.g., Toyota Fortuner 2023">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">
+                                <i class="fas fa-hashtag"></i> License Plate
+                            </label>
+                            <input type="text" class="form-control" id="licensePlate" placeholder="e.g., JK15A-1234">
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">
+                                <i class="fas fa-map-marker-alt"></i> Preferred Location
+                                <span class="required">*</span>
+                            </label>
+                            <input type="text" class="form-control" id="location" placeholder="Enter your city or area"
+                                required>
+                            <div class="form-hint">We'll show you stations near this location</div>
+                        </div>
+
+                        <div class="form-group full-width">
+                            <label class="form-label">
+                                <i class="fas fa-comment"></i> Special Instructions (Optional)
+                            </label>
+                            <textarea class="form-control" id="instructions"
+                                placeholder="Any special requests or instructions for the wash service"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Station Selection -->
+                <div class="station-section">
+                    <h2 class="section-title">Select Wash Station</h2>
+                    <div class="stations-grid" id="stationsGrid">
+                        <div class="station-card" data-station="sparkle">
+                            <div class="station-card-header">
+                                <div class="station-name">Sparkle Clean Pro</div>
+                                <div class="station-rating">
+                                    <i class="fas fa-star"></i> 4.8
+                                </div>
+                            </div>
+                            <div class="station-details">
+                                <div class="station-detail">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>2.1 km away</span>
+                                </div>
+                                <div class="station-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Open until 10 PM</span>
+                                </div>
+                                <div class="station-detail">
+                                    <i class="fas fa-concierge-bell"></i>
+                                    <span>Full Service Available</span>
+                                </div>
+                            </div>
+                            <div class="station-price">₹400 - ₹1100</div>
+                        </div>
+
+                        <div class="station-card selected" data-station="aqua">
+                            <div class="station-card-header">
+                                <div class="station-name">Aqua Shine Express</div>
+                                <div class="station-rating">
+                                    <i class="fas fa-star"></i> 4.6
+                                </div>
+                            </div>
+                            <div class="station-details">
+                                <div class="station-detail">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>3.5 km away</span>
+                                </div>
+                                <div class="station-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Open 24/7</span>
+                                </div>
+                                <div class="station-detail">
+                                    <i class="fas fa-concierge-bell"></i>
+                                    <span>Express Service</span>
+                                </div>
+                            </div>
+                            <div class="station-price">₹300 - ₹900</div>
+                        </div>
+
+                        <div class="station-card" data-station="green">
+                            <div class="station-card-header">
+                                <div class="station-name">Green Wash Co.</div>
+                                <div class="station-rating">
+                                    <i class="fas fa-star"></i> 4.9
+                                </div>
+                            </div>
+                            <div class="station-details">
+                                <div class="station-detail">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>1.8 km away</span>
+                                </div>
+                                <div class="station-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Open until 9 PM</span>
+                                </div>
+                                <div class="station-detail">
+                                    <i class="fas fa-concierge-bell"></i>
+                                    <span>Eco-Friendly</span>
+                                </div>
+                            </div>
+                            <div class="station-price">₹500 - ₹1400</div>
+                        </div>
+
+                        <div class="station-card" data-station="quick">
+                            <div class="station-card-header">
+                                <div class="station-name">Quick Wash Hub</div>
+                                <div class="station-rating">
+                                    <i class="fas fa-star"></i> 4.4
+                                </div>
+                            </div>
+                            <div class="station-details">
+                                <div class="station-detail">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>4.2 km away</span>
+                                </div>
+                                <div class="station-detail">
+                                    <i class="fas fa-clock"></i>
+                                    <span>Open until 8 PM</span>
+                                </div>
+                                <div class="station-detail">
+                                    <i class="fas fa-concierge-bell"></i>
+                                    <span>Budget Friendly</span>
+                                </div>
+                            </div>
+                            <div class="station-price">₹250 - ₹700</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service Selection -->
+                <div class="service-section">
+                    <h2 class="section-title">Select Wash Service</h2>
+                    <div class="services-grid" id="servicesGrid">
+                        <div class="service-card" data-service="basic">
+                            <div class="service-card-header">
+                                <div class="service-name">Basic Exterior</div>
+                                <div class="service-price">₹400</div>
+                            </div>
+                            <div class="service-duration">
+                                <i class="far fa-clock"></i> 15-20 minutes
+                            </div>
+                            <div class="service-description">
+                                Quick exterior wash, rinse, and dry. Perfect for a basic clean.
+                            </div>
+                        </div>
+
+                        <div class="service-card selected" data-service="standard">
+                            <div class="service-card-header">
+                                <div class="service-name">Standard Wash</div>
+                                <div class="service-price">₹700</div>
+                            </div>
+                            <div class="service-duration">
+                                <i class="far fa-clock"></i> 25-30 minutes
+                            </div>
+                            <div class="service-description">
+                                Exterior wash, wheel cleaning, tire shine, and interior vacuum.
+                            </div>
+                        </div>
+
+                        <div class="service-card" data-service="premium">
+                            <div class="service-card-header">
+                                <div class="service-name">Premium Detail</div>
+                                <div class="service-price">₹1200</div>
+                            </div>
+                            <div class="service-duration">
+                                <i class="far fa-clock"></i> 45-60 minutes
+                            </div>
+                            <div class="service-description">
+                                Full interior/exterior detail with wax, window cleaning, and leather treatment.
+                            </div>
+                        </div>
+
+                        <div class="service-card" data-service="ultimate">
+                            <div class="service-card-header">
+                                <div class="service-name">Ultimate Package</div>
+                                <div class="service-price">₹1800</div>
+                            </div>
+                            <div class="service-duration">
+                                <i class="far fa-clock"></i> 60-75 minutes
+                            </div>
+                            <div class="service-description">
+                                Premium detail + engine bay cleaning, clay bar treatment, and ceramic coating.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Date & Time Selection -->
+                <div class="datetime-section">
+                    <h2 class="section-title">Select Date & Time</h2>
+                    <div class="datetime-grid">
+                        <div class="date-selection">
+                            <h3 style="margin-bottom: 8px; font-weight: 600;">Select Date</h3>
+                            <div class="calendar" id="calendar">
+                                <div class="calendar-header">
+                                    <div class="current-month" id="currentMonth">December 2025</div>
+                                    <div class="calendar-nav">
+                                        <button class="calendar-nav-btn" id="prevMonth">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <button class="calendar-nav-btn" id="nextMonth">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="calendar-grid" id="calendarGrid">
+                                    <!-- Calendar will be generated by JavaScript -->
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="time-selection">
+                            <h3 style="margin-bottom: 8px; font-weight: 600;">Select Time Slot</h3>
+                            <div class="time-slots" id="timeSlots">
+                                <!-- Time slots will be generated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Column: Booking Summary -->
+            <div class="booking-summary-card">
+                <div class="summary-header">
+                    <div class="summary-title">Booking Summary</div>
+                </div>
+
+                <div class="summary-content">
+                    <div class="summary-item">
+                        <span class="item-label">Customer Name</span>
+                        <div class="item-value" id="summaryName">Not provided</div>
+                    </div>
+
+                    <div class="summary-item">
+                        <span class="item-label">Email</span>
+                        <div class="item-value" id="summaryEmail">Not provided</div>
+                    </div>
+
+                    <div class="summary-item">
+                        <span class="item-label">Phone</span>
+                        <div class="item-value" id="summaryPhone">Not provided</div>
+                    </div>
+
+                    <div class="summary-item">
+                        <span class="item-label">Vehicle</span>
+                        <div class="item-value" id="summaryVehicle">Not selected</div>
+                    </div>
+
+                    <div class="summary-item">
+                        <span class="item-label">Selected Station</span>
+                        <div class="item-value" id="summaryStation">Not selected</div>
+                    </div>
+
+                    <div class="summary-item">
+                        <span class="item-label">Selected Service</span>
+                        <div class="item-value" id="summaryService">Not selected</div>
+                    </div>
+
+                    <div class="summary-item">
+                        <span class="item-label">Date & Time</span>
+                        <div class="item-value" id="summaryDateTime">Not selected</div>
+                    </div>
+
+                    <div class="price-breakdown">
+                        <div class="price-row">
+                            <span class="price-label">Service Cost</span>
+                            <span class="price-value" id="serviceCost">₹0</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">Convenience Fee</span>
+                            <span class="price-value">₹30</span>
+                        </div>
+                        <div class="price-row">
+                            <span class="price-label">GST (18%)</span>
+                            <span class="price-value" id="taxAmount">₹0</span>
+                        </div>
+                    </div>
+
+                    <div class="total-row">
+                        <span class="total-label">Total Amount</span>
+                        <span class="total-value" id="totalAmount">₹0</span>
+                    </div>
+
+                    <div class="summary-note whatsapp-note">
+                        <i class="fab fa-whatsapp"></i>
+                        Clicking "Send WhatsApp Booking" will open WhatsApp with all your booking details pre-filled.
+                    </div>
+
+                    <div class="summary-note">
+                        <i class="fas fa-info-circle"></i>
+                        WhatsApp will open for +91 80820 42836. Just tap send to complete your booking.
+                    </div>
+
+                    <button class="btn btn-whatsapp btn-large btn-block" id="confirmBookingBtn">
+                        <i class="fab fa-whatsapp"></i> Send WhatsApp Booking
+                    </button>
+
+                    <p style="text-align: center; margin-top: 16px; color: var(--medium-gray); font-size: 13px;">
+                        All prices are in Indian Rupees (₹)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Loading Modal -->
+    <div class="modal-overlay" id="loadingModal">
+        <div class="loading-modal">
+            <div class="loading-spinner"></div>
+            <h2 class="modal-title" id="modalTitle">Opening WhatsApp...</h2>
+            <p class="modal-text" id="modalText">
+                Preparing your booking details and opening WhatsApp. Please wait...
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Initialize variables
+        let selectedStation = 'aqua';
+        let selectedService = 'standard';
+        let selectedDate = null;
+        let selectedTime = null;
+
+        // Service prices in INR
+        const servicePrices = {
+            basic: 400,
+            standard: 700,
+            premium: 1200,
+            ultimate: 1800
+        };
+
+        // Station names
+        const stationNames = {
+            sparkle: 'Sparkle Clean Pro',
+            aqua: 'Aqua Shine Express',
+            green: 'Green Wash Co.',
+            quick: 'Quick Wash Hub'
+        };
+
+        // Service names
+        const serviceNames = {
+            basic: 'Basic Exterior Wash',
+            standard: 'Standard Wash',
+            premium: 'Premium Detail',
+            ultimate: 'Ultimate Package'
+        };
+
+        // WhatsApp number (with country code)
+        const whatsappNumber = '+918082042836';
+
+        // DOM Elements
+        const stationCards = document.querySelectorAll('.station-card');
+        const serviceCards = document.querySelectorAll('.service-card');
+        const calendarGrid = document.getElementById('calendarGrid');
+        const timeSlots = document.getElementById('timeSlots');
+        const confirmBookingBtn = document.getElementById('confirmBookingBtn');
+        const loadingModal = document.getElementById('loadingModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalText = document.getElementById('modalText');
+
+        // Form inputs
+        const fullNameInput = document.getElementById('fullName');
+        const emailInput = document.getElementById('email');
+        const phoneInput = document.getElementById('phone');
+        const vehicleTypeInput = document.getElementById('vehicleType');
+        const vehicleModelInput = document.getElementById('vehicleModel');
+        const licensePlateInput = document.getElementById('licensePlate');
+        const locationInput = document.getElementById('location');
+        const instructionsInput = document.getElementById('instructions');
+
+        // Summary elements
+        const summaryName = document.getElementById('summaryName');
+        const summaryEmail = document.getElementById('summaryEmail');
+        const summaryPhone = document.getElementById('summaryPhone');
+        const summaryVehicle = document.getElementById('summaryVehicle');
+        const summaryStation = document.getElementById('summaryStation');
+        const summaryService = document.getElementById('summaryService');
+        const summaryDateTime = document.getElementById('summaryDateTime');
+
+        // Update booking summary when form changes
+        function updateBookingSummary() {
+            // Update personal info
+            summaryName.textContent = fullNameInput.value || 'Not provided';
+            summaryEmail.textContent = emailInput.value || 'Not provided';
+            summaryPhone.textContent = phoneInput.value || 'Not provided';
+
+            // Update vehicle info
+            const vehicleType = vehicleTypeInput.value;
+            const vehicleModel = vehicleModelInput.value;
+            if (vehicleType) {
+                summaryVehicle.textContent = `${vehicleType}${vehicleModel ? ' - ' + vehicleModel : ''}`;
+            } else {
+                summaryVehicle.textContent = 'Not selected';
+            }
+
+            // Update station
+            summaryStation.textContent = stationNames[selectedStation] || 'Not selected';
+
+            // Update service
+            summaryService.textContent = serviceNames[selectedService] || 'Not selected';
+
+            // Update date and time
+            if (selectedDate && selectedTime) {
+                summaryDateTime.textContent = `${formatDate(selectedDate)} at ${selectedTime}`;
+            } else {
+                summaryDateTime.textContent = 'Not selected';
+            }
+
+            // Update price in INR
+            const serviceCost = servicePrices[selectedService] || 0;
+            document.getElementById('serviceCost').textContent = `₹${serviceCost.toLocaleString('en-IN')}`;
+
+            // Update GST (18%)
+            const taxAmount = serviceCost * 0.18;
+            document.getElementById('taxAmount').textContent = `₹${taxAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+            // Update total
+            const totalAmount = serviceCost + 30 + taxAmount;
+            document.getElementById('totalAmount').textContent = `₹${totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        }
+
+        // Format date for display
+        function formatDate(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-IN', {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            });
+        }
+
+        // Format date for WhatsApp (compact format)
+        function formatDateForWhatsApp(dateString) {
+            if (!dateString) return '';
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-IN', {
+                day: 'numeric',
+                month: 'short',
+                year: 'numeric'
+            });
+        }
+
+        // Station selection
+        stationCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Remove selected class from all cards
+                stationCards.forEach(c => c.classList.remove('selected'));
+
+                // Add selected class to clicked card
+                card.classList.add('selected');
+
+                // Update selected station
+                selectedStation = card.getAttribute('data-station');
+
+                // Update booking summary
+                updateBookingSummary();
+            });
+        });
+
+        // Service selection
+        serviceCards.forEach(card => {
+            card.addEventListener('click', () => {
+                // Remove selected class from all cards
+                serviceCards.forEach(c => c.classList.remove('selected'));
+
+                // Add selected class to clicked card
+                card.classList.add('selected');
+
+                // Update selected service
+                selectedService = card.getAttribute('data-service');
+
+                // Update booking summary
+                updateBookingSummary();
+            });
+        });
+
+        // Calendar generation
+        function generateCalendar(year, month) {
+            // Clear existing calendar days
+            const existingDays = document.querySelectorAll('.calendar-day');
+            existingDays.forEach(day => day.remove());
+
+            // Clear calendar headers if they exist (except the first 7)
+            const dayHeaders = document.querySelectorAll('.calendar-day-header');
+            if (dayHeaders.length > 7) {
+                for (let i = 7; i < dayHeaders.length; i++) {
+                    dayHeaders[i].remove();
+                }
+            }
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = new Date();
+
+            // Fill empty days before the first day of the month
+            for (let i = 0; i < firstDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'calendar-day disabled';
+                emptyDay.textContent = '';
+                calendarGrid.appendChild(emptyDay);
+            }
+
+            // Fill days of the month
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+
+                // Set data attribute for date
+                const dateString = `${year}-${(month + 1).toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+                dayElement.setAttribute('data-date', dateString);
+
+                // Check if today
+                const currentDate = new Date(year, month, day);
+                if (currentDate.getDate() === today.getDate() &&
+                    currentDate.getMonth() === today.getMonth() &&
+                    currentDate.getFullYear() === today.getFullYear()) {
+                    dayElement.classList.add('today');
+                }
+
+                // Check if selected
+                if (selectedDate === dateString) {
+                    dayElement.classList.add('selected');
+                }
+
+                // Disable past dates
+                if (currentDate < today) {
+                    dayElement.classList.add('disabled');
+                } else {
+                    // Add click event
+                    dayElement.addEventListener('click', () => {
+                        if (!dayElement.classList.contains('disabled')) {
+                            // Remove selected from all days
+                            document.querySelectorAll('.calendar-day').forEach(d => {
+                                d.classList.remove('selected');
+                            });
+
+                            // Add selected to clicked day
+                            dayElement.classList.add('selected');
+
+                            // Update selected date
+                            selectedDate = dateString;
+
+                            // Generate time slots for selected date
+                            generateTimeSlots();
+
+                            // Update booking summary
+                            updateBookingSummary();
+                        }
+                    });
+                }
+
+                calendarGrid.appendChild(dayElement);
+            }
+
+            // Update month display
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'];
+            document.getElementById('currentMonth').textContent = `${monthNames[month]} ${year}`;
+        }
+
+        // Time slots generation
+        function generateTimeSlots() {
+            // Clear existing time slots
+            timeSlots.innerHTML = '';
+
+            if (!selectedDate) return;
+
+            const timeSlotsArray = [
+                { time: '8:00 AM', available: true, peak: false },
+                { time: '9:00 AM', available: true, peak: false },
+                { time: '10:00 AM', available: true, peak: false },
+                { time: '11:00 AM', available: false, peak: false },
+                { time: '12:00 PM', available: true, peak: true },
+                { time: '1:00 PM', available: true, peak: true },
+                { time: '2:00 PM', available: true, peak: true },
+                { time: '3:00 PM', available: true, peak: true },
+                { time: '4:00 PM', available: true, peak: false },
+                { time: '5:00 PM', available: false, peak: false },
+                { time: '6:00 PM', available: true, peak: false },
+                { time: '7:00 PM', available: true, peak: false }
+            ];
+
+            timeSlotsArray.forEach(slot => {
+                const slotElement = document.createElement('div');
+                slotElement.className = 'time-slot';
+                slotElement.textContent = slot.time;
+
+                if (!slot.available) {
+                    slotElement.classList.add('disabled');
+                } else {
+                    // Check if this slot is selected
+                    if (selectedTime === slot.time) {
+                        slotElement.classList.add('selected');
+                    }
+
+                    // Add click event for available slots
+                    slotElement.addEventListener('click', () => {
+                        if (!slotElement.classList.contains('disabled')) {
+                            // Remove selected from all slots
+                            document.querySelectorAll('.time-slot').forEach(s => {
+                                s.classList.remove('selected');
+                            });
+
+                            // Add selected to clicked slot
+                            slotElement.classList.add('selected');
+
+                            // Update selected time
+                            selectedTime = slot.time;
+
+                            // Update booking summary
+                            updateBookingSummary();
+                        }
+                    });
+                }
+
+                timeSlots.appendChild(slotElement);
+            });
+        }
+
+        // Calendar navigation
+        let currentDate = new Date();
+        let currentYear = currentDate.getFullYear();
+        let currentMonth = currentDate.getMonth();
+
+        document.getElementById('prevMonth').addEventListener('click', () => {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            generateCalendar(currentYear, currentMonth);
+        });
+
+        document.getElementById('nextMonth').addEventListener('click', () => {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            generateCalendar(currentYear, currentMonth);
+        });
+
+        // Form input listeners to update summary in real-time
+        const formInputs = [
+            fullNameInput, emailInput, phoneInput, vehicleTypeInput,
+            vehicleModelInput, licensePlateInput, locationInput, instructionsInput
+        ];
+
+        formInputs.forEach(input => {
+            input.addEventListener('input', updateBookingSummary);
+            input.addEventListener('change', updateBookingSummary);
+        });
+
+        // Generate WhatsApp message
+        function generateWhatsAppMessage() {
+            const serviceCost = servicePrices[selectedService] || 0;
+            const taxAmount = serviceCost * 0.18;
+            const totalAmount = serviceCost + 30 + taxAmount;
+
+            // WhatsApp message with emojis (they work fine in WhatsApp)
+            const message = `🚗 *SPEEDLE VEHICLE WASH BOOKING REQUEST*
+
+👤 *Customer Information:*
+• Name: ${fullNameInput.value || 'Not provided'}
+• Email: ${emailInput.value || 'Not provided'}
+• Phone: ${phoneInput.value || 'Not provided'}
+
+🚙 *Vehicle Details:*
+• Type: ${vehicleTypeInput.value || 'Not selected'}
+• Model: ${vehicleModelInput.value || 'Not provided'}
+• License Plate: ${licensePlateInput.value || 'Not provided'}
+
+📅 *Booking Details:*
+• Location: ${locationInput.value || 'Not provided'}
+• Station: ${stationNames[selectedStation] || 'Not selected'}
+• Service: ${serviceNames[selectedService] || 'Not selected'}
+• Date: ${selectedDate ? formatDateForWhatsApp(selectedDate) : 'Not selected'}
+• Time: ${selectedTime || 'Not selected'}
+
+💰 *Payment Summary (INR):*
+• Service: ₹${serviceCost.toLocaleString('en-IN')}
+• Convenience Fee: ₹30
+• GST (18%): ₹${taxAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}
+• *Total: ₹${totalAmount.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}*
+
+📝 *Special Instructions:*
+${instructionsInput.value || 'None'}
+
+_Please confirm this booking and send payment instructions._`;
+
+            return encodeURIComponent(message);
+        }
+
+        // Open WhatsApp with booking details
+        function openWhatsApp() {
+            const message = generateWhatsAppMessage();
+
+            // WhatsApp Web/App URL
+            const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${message}`;
+
+            // Update modal
+            modalTitle.textContent = 'Opening WhatsApp...';
+            modalText.textContent = 'Preparing your booking details and opening WhatsApp.';
+
+            // Open WhatsApp
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+
+                // Close modal after a delay
+                setTimeout(() => {
+                    loadingModal.classList.remove('active');
+                }, 1000);
+            }, 1500);
+        }
+
+        // Confirm booking
+        confirmBookingBtn.addEventListener('click', () => {
+            // Validate form
+            if (!fullNameInput.value) {
+                alert('Please enter your full name.');
+                fullNameInput.focus();
+                return;
+            }
+
+            if (!emailInput.value) {
+                alert('Please enter your email address.');
+                emailInput.focus();
+                return;
+            }
+
+            if (!phoneInput.value) {
+                alert('Please enter your phone number.');
+                phoneInput.focus();
+                return;
+            }
+
+            if (!vehicleTypeInput.value) {
+                alert('Please select your vehicle type.');
+                vehicleTypeInput.focus();
+                return;
+            }
+
+            if (!locationInput.value) {
+                alert('Please enter your preferred location.');
+                locationInput.focus();
+                return;
+            }
+
+            if (!selectedDate || !selectedTime) {
+                alert('Please select a date and time for your wash.');
+                return;
+            }
+
+            // Show loading modal
+            loadingModal.classList.add('active');
+
+            // Open WhatsApp
+            openWhatsApp();
+        });
+
+        // Initialize calendar with current month
+        generateCalendar(currentYear, currentMonth);
+
+        // Set default values for testing
+        setTimeout(() => {
+            // Set test values
+            fullNameInput.value = "ASIF NAZIR";
+            emailInput.value = "ASIFNAZIRMANTOO@GMAIL.COM";
+            phoneInput.value = "08082042836";
+            vehicleTypeInput.value = "SUV";
+            locationInput.value = "Shopian";
+
+            // Set date to December 10, 2025
+            const testDate = new Date(2025, 11, 10); // December 10, 2025
+            const testDateString = `${testDate.getFullYear()}-${(testDate.getMonth() + 1).toString().padStart(2, '0')}-${testDate.getDate().toString().padStart(2, '0')}`;
+
+            // Update the calendar to show December 2025
+            currentYear = 2025;
+            currentMonth = 11; // December (0-indexed)
+            generateCalendar(currentYear, currentMonth);
+
+            // Wait for calendar to render, then select the date
+            setTimeout(() => {
+                selectedDate = testDateString;
+                const dateElement = document.querySelector(`.calendar-day[data-date="${testDateString}"]`);
+                if (dateElement && !dateElement.classList.contains('disabled')) {
+                    dateElement.click();
+                }
+
+                // Update booking summary
+                updateBookingSummary();
+
+                // Select time slot
+                setTimeout(() => {
+                    generateTimeSlots();
+                    setTimeout(() => {
+                        const timeSlotElements = document.querySelectorAll('.time-slot');
+                        timeSlotElements.forEach(slot => {
+                            if (slot.textContent === '2:00 PM' && !slot.classList.contains('disabled')) {
+                                slot.click();
+                            }
+                        });
+                    }, 200);
+                }, 200);
+            }, 300);
+        }, 500);
+    </script>
+</body>
+
+</html>
