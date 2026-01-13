@@ -4,1578 +4,391 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speedle Private Limited - Smart Service Station Management</title>
+    <title>Speedle - Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
-    <style>
-        :root {
-            --primary-blue: #1e40af;
-            --deep-blue: #1e3a8a;
-            --light-blue: #3b82f6;
-            --accent-red: #ef4444;
-            --dark-red: #dc2626;
-            --light-gray: #f8fafc;
-            --medium-gray: #e2e8f0;
-            --text-dark: #1f2937;
-            --text-medium: #4b5563;
-            --text-light: #6b7280;
-            --white: #ffffff;
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
-            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-            --radius-lg: 20px;
-            --radius-md: 12px;
-            --radius-sm: 8px;
-            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            line-height: 1.6;
-            color: var(--text-dark);
-            background-color: var(--white);
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            margin-top: -90px;
-        }
-
-        section {
-            padding: 80px 0;
-            scroll-margin-top: 80px;
-        }
-
-        h1,
-        h2,
-        h3,
-        h4 {
-            font-weight: 600;
-            line-height: 1.2;
-        }
-
-        h1 {
-            font-size: 3.2rem;
-            margin-bottom: 20px;
-            letter-spacing: -0.025em;
-        }
-
-        h2 {
-            font-size: 2.5rem;
-            margin-bottom: 40px;
-            text-align: center;
-            color: var(--deep-blue);
-            letter-spacing: -0.015em;
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: var(--deep-blue);
-        }
-
-        p {
-            margin-bottom: 24px;
-            font-size: 1.125rem;
-            color: var(--text-medium);
-            line-height: 1.7;
-        }
-
-        .section-subtitle {
-            text-align: center;
-            font-size: 1.25rem;
-            color: var(--text-light);
-            max-width: 700px;
-            margin: 0 auto 60px;
-        }
-
-        /* Button Styles */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            background-color: var(--accent-red);
-            color: var(--white);
-            padding: 16px 36px;
-            border-radius: var(--radius-md);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.125rem;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--shadow-md);
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-
-        .btn:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--dark-red);
-            border-radius: var(--radius-md);
-            z-index: -1;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        .btn:hover:after {
-            transform: translateY(0);
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .btn i {
-            margin-left: 10px;
-            transition: transform 0.3s ease;
-        }
-
-        .btn:hover i {
-            transform: translateX(4px);
-        }
-
-        .btn-secondary {
-            background-color: var(--primary-blue);
-        }
-
-        .btn-secondary:after {
-            background-color: var(--deep-blue);
-        }
-
-        /* Enhanced Hero Section with Visual Content */
-        .hero {
-            /* background: linear-gradient(135deg, rgba(30, 64, 175, 0.92) 0%, rgba(30, 58, 138, 0.88) 100%); */
-            background:
-                linear-gradient(135deg,
-                    rgba(30, 64, 175, 0.92) 0%,
-                    rgba(30, 58, 138, 0.88) 100%),
-                url("https://github.com/thisizasif/Speedle/blob/main/src/hero.png?raw=true");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-
-            color: var(--white);
-            text-align: center;
-            padding: 140px 0 120px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero:before {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to bottom, transparent, var(--white));
-            z-index: 1;
-        }
-
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            color: var(--white);
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .hero-tagline {
-            display: inline-block;
-            background-color: rgba(239, 68, 68, 0.2);
-            color: #fecaca;
-            padding: 8px 20px;
-            border-radius: 50px;
-            font-size: 1.25rem;
-            font-weight: 500;
-            margin-bottom: 30px;
-            border: 1px solid rgba(239, 68, 68, 0.3);
-        }
-
-        .hero p {
-            font-size: 1.4rem;
-            max-width: 700px;
-            margin: 0 auto 40px;
-            color: #dbeafe;
-        }
-
-        .hero-cta {
-            margin-top: 40px;
-        }
-
-        /* Hero Visual Elements */
-        .hero-visual {
-            position: relative;
-            max-width: 800px;
-            margin: 60px auto 0;
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-lg);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .hero-visual img {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .hero-visual-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to bottom, transparent, rgba(30, 58, 138, 0.3));
-            display: flex;
-            align-items: flex-end;
-            padding: 30px;
-        }
-
-        .hero-visual-caption {
-            color: white;
-            font-size: 1.1rem;
-            background: rgba(0, 0, 0, 0.6);
-            padding: 10px 20px;
-            border-radius: var(--radius-sm);
-            backdrop-filter: blur(10px);
-        }
-
-        /* Problems Section with Images */
-        .problems-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 60px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .problem-item {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-        }
-
-        .problem-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .problem-item.reverse {
-            direction: rtl;
-        }
-
-        .problem-item.reverse .problem-content {
-            direction: ltr;
-        }
-
-        .problem-image {
-            width: 100%;
-            height: 350px;
-            overflow: hidden;
-        }
-
-        .problem-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .problem-item:hover .problem-image img {
-            transform: scale(1.05);
-        }
-
-        .problem-content {
-            padding: 40px;
-        }
-
-        .problem-icon {
-            width: 70px;
-            height: 70px;
-            border-radius: var(--radius-lg);
-            background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 25px;
-        }
-
-        .problem-icon i {
-            font-size: 32px;
-            color: var(--accent-red);
-        }
-
-        .problem-list {
-            list-style-type: none;
-            padding-left: 0;
-            margin-top: 25px;
-        }
-
-        .problem-list li {
-            padding-left: 30px;
-            margin-bottom: 15px;
-            position: relative;
-            color: var(--text-medium);
-            font-size: 1.05rem;
-        }
-
-        .problem-list li:before {
-            content: "•";
-            position: absolute;
-            left: 0;
-            color: var(--accent-red);
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-
-        /* Solution Cards */
-        .solution-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .solution-card {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            height: 100%;
-        }
-
-        .solution-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .solution-image {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .solution-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        .solution-card:hover .solution-image img {
-            transform: scale(1.1);
-        }
-
-        .solution-card-content {
-            padding: 30px;
-        }
-
-        .solution-card-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: var(--radius-md);
-            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .solution-card-icon i {
-            font-size: 28px;
-            color: var(--primary-blue);
-        }
-
-        /* How It Works */
-        .steps-container {
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            max-width: 1000px;
-            margin: 0 auto;
-            position: relative;
-            gap: 40px;
-        }
-
-        .step {
-            flex: 1;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .step-number {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: var(--primary-blue);
-            color: var(--white);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0 auto 25px;
-            box-shadow: var(--shadow-md);
-            position: relative;
-            z-index: 2;
-        }
-
-        .step-connector {
-            position: absolute;
-            top: 30px;
-            left: 50%;
-            width: 100%;
-            height: 3px;
-            background-color: var(--medium-gray);
-            z-index: 1;
-        }
-
-        .step-content {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 30px;
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-            height: 100%;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .step:hover .step-content {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .step-icon {
-            font-size: 3rem;
-            color: var(--light-blue);
-            margin: 20px 0;
-            opacity: 0.8;
-        }
-
-        /* Location Section */
-        .location-card {
-            background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-            border-radius: var(--radius-lg);
-            padding: 60px;
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            overflow: hidden;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: center;
-        }
-
-        .location-visual {
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-        }
-
-        .location-visual img {
-            width: 100%;
-            height: 300px;
-            object-fit: cover;
-            display: block;
-        }
-
-        .location-content {
-            padding: 20px 0;
-        }
-
-        .trust-badge {
-            display: inline-flex;
-            align-items: center;
-            background-color: var(--white);
-            padding: 15px 25px;
-            border-radius: 50px;
-            margin-top: 30px;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .trust-badge i {
-            color: #10b981;
-            margin-right: 10px;
-            font-size: 1.2rem;
-        }
-
-        /* Benefits Grid */
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-
-        .benefit-item {
-            text-align: center;
-            padding: 40px 30px;
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            transition: var(--transition);
-        }
-
-        .benefit-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .benefit-icon {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background-color: #dcfce7;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 25px;
-        }
-
-        .benefit-icon i {
-            font-size: 32px;
-            color: #16a34a;
-        }
-
-        /* About Section */
-        .about-card {
-            background-color: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 60px;
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-            box-shadow: var(--shadow-md);
-            border-left: 5px solid var(--primary-blue);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-visual {
-            width: 100%;
-            height: 200px;
-            border-radius: var(--radius-md);
-            overflow: hidden;
-            margin: 30px 0;
-            box-shadow: var(--shadow-md);
-        }
-
-        .about-visual img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Footer */
-        footer {
-            background-color: var(--deep-blue);
-            color: var(--white);
-            padding: 80px 0 40px;
-            margin-top: 60px;
-        }
-
-        .footer-content {
-            max-width: 1000px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .footer-logo {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: var(--white);
-            letter-spacing: -0.025em;
-        }
-
-        .footer-tagline {
-            font-size: 1.25rem;
-            color: #93c5fd;
-            margin-bottom: 40px;
-            font-style: italic;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin: 40px 0;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            color: #dbeafe;
-            font-size: 1.1rem;
-        }
-
-        .contact-item i {
-            margin-right: 12px;
-            color: #60a5fa;
-            font-size: 1.2rem;
-        }
-
-        .company-info {
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            color: #dbeafe;
-        }
-
-        .disclaimer {
-            font-size: 0.9rem;
-            color: #93c5fd;
-            margin-top: 50px;
-            padding-top: 30px;
-            border-top: 1px solid #3b82f6;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            h1 {
-                font-size: 2.8rem;
-            }
-
-            h2 {
-                font-size: 2.2rem;
-            }
-
-            .problem-item {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-
-            .problem-image {
-                height: 300px;
-            }
-
-            .location-card {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .steps-container {
-                flex-direction: column;
-                gap: 60px;
-            }
-
-            .step-connector {
-                display: none;
-            }
-        }
-
-        @media (max-width: 768px) {
-            section {
-                padding: 60px 0;
-            }
-
-            h1 {
-                font-size: 2.3rem;
-            }
-
-            h2 {
-                font-size: 1.9rem;
-            }
-
-            .hero {
-                padding: 100px 0 80px;
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-
-            .hero p {
-                font-size: 1.2rem;
-            }
-
-            .hero-visual {
-                margin: 40px auto 0;
-            }
-
-            .hero-visual img {
-                height: 300px;
-            }
-
-            .problem-content {
-                padding: 30px;
-            }
-
-            .solution-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .about-card {
-                padding: 40px 30px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.7rem;
-            }
-
-            .btn {
-                padding: 14px 28px;
-                font-size: 1rem;
-            }
-
-            .problem-image {
-                height: 250px;
-            }
-
-            .hero-visual img {
-                height: 250px;
-            }
-
-            .hero-visual-overlay {
-                padding: 20px;
-            }
-
-            .hero-visual-caption {
-                font-size: 1rem;
-                padding: 8px 16px;
-            }
-        }
-
-        /* Navigation */
-        .sp-nav {
-            position: relative;
-            z-index: 50;
-        }
-
-        .sp-nav__container {
-            max-width: 1200px;
-            margin: 16px auto;
-            padding: 16px 24px;
-            background: #fff;
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .sp-nav__logo {
-            font-family: 'Inter', sans-serif;
-            font-size: 30px;
-            font-weight: 700;
-        }
-
-        .sp-nav__logo span:first-child {
-            color: #1f5cff;
-        }
-
-        .sp-nav__logo span:last-child {
-            color: #e63935;
-        }
-
-        .sp-nav__links {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-        }
-
-        .sp-nav__link {
-            font-family: 'Inter', sans-serif;
-            font-size: 15px;
-            text-decoration: none;
-            color: #500303;
-        }
-
-        .sp-nav__cta {
-            background: #ec4899;
-            color: #fff;
-            border: none;
-            padding: 10px 18px;
-            border-radius: 999px;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        /* Hamburger Menu */
-        .sp-nav__hamburger {
-            display: none;
-            width: 28px;
-            height: 22px;
-            background: none;
-            border: none;
-            position: relative;
-            cursor: pointer;
-            z-index: 10001;
-        }
-
-        .sp-nav__hamburger span {
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: #000;
-            left: 0;
-            transition: 0.3s ease;
-        }
-
-        .sp-nav__hamburger span:nth-child(1) {
-            top: 0;
-        }
-
-        .sp-nav__hamburger span:nth-child(2) {
-            top: 10px;
-        }
-
-        .sp-nav__hamburger span:nth-child(3) {
-            top: 20px;
-        }
-
-        .sp-nav__hamburger.active span:nth-child(1) {
-            transform: rotate(45deg);
-            top: 10px;
-        }
-
-        .sp-nav__hamburger.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .sp-nav__hamburger.active span:nth-child(3) {
-            transform: rotate(-45deg);
-            top: 10px;
-        }
-
-        /* Overlay */
-        .sp-nav__overlay {
-            position: fixed;
-            inset: 0;
-            background: #fff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 40px;
-            transform: translateY(-100%);
-            transition: transform 0.35s ease;
-            z-index: 10000;
-        }
-
-        .sp-nav__overlay.active {
-            transform: translateY(0);
-        }
-
-        .sp-nav__overlay-links {
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
-            text-align: center;
-        }
-
-        .sp-nav__overlay-link {
-            font-family: 'Inter', sans-serif;
-            font-size: 20px;
-            color: #111;
-            text-decoration: none;
-        }
-
-        .sp-nav__hamburger--overlay {
-            position: absolute;
-            top: 24px;
-            right: 24px;
-            display: block;
-        }
-
-        @media (max-width: 768px) {
-            .sp-nav__links {
-                display: none;
-            }
-
-            .sp-nav__hamburger {
-                display: block;
-            }
-        }
-
-        /* Animation classes */
-        .fade-in {
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="/assets/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/assets/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
-    <header class="sp-nav">
-        <div class="sp-nav__container" style="height: 15px;">
-            <div class="sp-nav__logo">
-                <span>speed</span><span>le</span>
-            </div>
+    <!-- nav start here -->
+    <nav class="navbar" id="navbar">
+        <!-- LOGO -->
+        <a href="/" class="logo" aria-label="Speedle Home">
+            <span class="logo-speed">speed</span><span class="logo-le">le</span>
+        </a>
 
-            <nav class="sp-nav__links">
-                <a href="#problems" class="sp-nav__link">Challenges</a>
-                <a href="#solutions" class="sp-nav__link">Solutions</a>
-                <a href="#how-it-works" class="sp-nav__link">How It Works</a>
-                <a href="#benefits" class="sp-nav__link">Benefits</a>
-                <a href="#about" class="sp-nav__link">About</a>
-            </nav>
+        <!-- DESKTOP MENU -->
+        <ul class="nav-links" id="desktop-menu">
+            <li class="nav-link-item">
+                <a href="#">Home</a>
+            </li>
 
-            <button class="sp-nav__hamburger" aria-label="Toggle menu" aria-expanded="false">
-                <span></span><span></span><span></span>
-            </button>
-        </div>
-    </header>
+            <li class="nav-link-item dropdown">
+                <a href="#" class="dropdown-toggle">
+                    How it Works <span class="arrow">▼</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><i class="fas fa-gas-pump"></i> For Service Stations</a></li>
+                    <li><a href="#"><i class="fas fa-car"></i> For Vehicle Owners</a></li>
+                </ul>
+            </li>
 
-    <!-- Overlay Menu -->
-    <div class="sp-nav__overlay" aria-hidden="true">
-        <button class="sp-nav__hamburger sp-nav__hamburger--overlay" aria-label="Toggle menu" aria-expanded="true">
-            <span></span><span></span><span></span>
+            <li class="nav-link-item dropdown">
+                <a href="#" class="dropdown-toggle">
+                    Solutions <span class="arrow">▼</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><i class="fas fa-clock"></i> Time-slot Management</a></li>
+                    <li><a href="#"><i class="fas fa-users"></i> Customer Flow Control</a></li>
+                    <li><a href="#"><i class="fas fa-calendar-day"></i> Daily Planning</a></li>
+                </ul>
+            </li>
+
+            <li class="nav-link-item dropdown">
+                <a href="#" class="dropdown-toggle">
+                    Why Speedle <span class="arrow">▼</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><i class="fas fa-exclamation-triangle"></i> Problems We Solve</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Benefits</a></li>
+                    <li><a href="#"><i class="fas fa-map-marked-alt"></i> Ground Reality Design</a></li>
+                </ul>
+            </li>
+
+            <li class="nav-link-item dropdown">
+                <a href="#" class="dropdown-toggle">
+                    Company <span class="arrow">▼</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="#"><i class="fas fa-info-circle"></i> About Speedle</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="#"><i class="fas fa-handshake"></i> Become a Partner</a></li>
+                </ul>
+            </li>
+
+            <!-- CTA BUTTON -->
+            <li class="nav-link-item">
+                <a href="/partners.html" class="cta">
+                    <i class="fas fa-rocket"></i> Partner with Speedle
+                </a>
+            </li>
+        </ul>
+
+        <!-- HAMBURGER BUTTON -->
+        <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+            <span></span>
+            <span></span>
+            <span></span>
         </button>
+    </nav>
 
-        <nav class="sp-nav__overlay-links">
-            <a href="#problems" class="sp-nav__overlay-link">Challenges</a>
-            <a href="#solutions" class="sp-nav__overlay-link">Solutions</a>
-            <a href="#how-it-works" class="sp-nav__overlay-link">How It Works</a>
-            <a href="#benefits" class="sp-nav__overlay-link">Benefits</a>
-            <a href="#about" class="sp-nav__overlay-link">About</a>
-        </nav>
+    <!-- MOBILE MENU OVERLAY -->
+    <div class="mobile-menu-overlay" id="mobileOverlay"></div>
+
+    <!-- MOBILE MENU -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul class="mobile-nav-links">
+            <!-- Home - Regular link -->
+            <li class="mobile-nav-item">
+                <a href="#" class="mobile-regular-link" data-close-menu="true">Home</a>
+            </li>
+
+            <!-- Dropdown 1 -->
+            <li class="mobile-nav-item mobile-dropdown-toggle">
+                <button class="mobile-nav-link" data-toggle="dropdown">
+                    How it Works <span class="arrow">▼</span>
+                </button>
+                <ul class="mobile-dropdown-menu">
+                    <li><a href="#" data-close-menu="true"><i class="fas fa-gas-pump"></i> For Service Stations</a></li>
+                    <li><a href="#" data-close-menu="true"><i class="fas fa-car"></i> For Vehicle Owners</a></li>
+                </ul>
+            </li>
+
+            <!-- Dropdown 2 -->
+            <li class="mobile-nav-item mobile-dropdown-toggle">
+                <button class="mobile-nav-link" data-toggle="dropdown">
+                    Solutions <span class="arrow">▼</span>
+                </button>
+                <ul class="mobile-dropdown-menu">
+                    <li><a href="#" data-close-menu="true"><i class="fas fa-clock"></i> Time-slot Management</a></li>
+                    <li><a href="#" data-close-menu="true"><i class="fas fa-users"></i> Customer Flow Control</a></li>
+                    <li><a href="#" data-close-menu="true"><i class="fas fa-calendar-day"></i> Daily Planning</a></li>
+                </ul>
+            </li>
+
+            <!-- Dropdown 3 -->
+            <li class="mobile-nav-item mobile-dropdown-toggle">
+                <button class="mobile-nav-link" data-toggle="dropdown">
+                    Why Speedle <span class="arrow">▼</span>
+                </button>
+                <ul class="mobile-dropdown-menu">
+                    <li><a href="#" data-close-menu="true"><i class="fas fa-exclamation-triangle"></i> Problems We
+                            Solve</a></li>
+                    <li><a href="#" data-close-menu="true"><i class="fas fa-chart-line"></i> Benefits</a></li>
+                    <li><a href="#" data-close-menu="true"><i class="fas fa-map-marked-alt"></i> Ground Reality
+                            Design</a></li>
+                </ul>
+            </li>
+
+            <!-- Dropdown 4 -->
+            <li class="mobile-nav-item mobile-dropdown-toggle">
+                <button class="mobile-nav-link" data-toggle="dropdown">
+                    Company <span class="arrow">▼</span>
+                </button>
+                <ul class="mobile-dropdown-menu">
+                    <li><a href="#" data-close-menu="true"><i class="fas fa-info-circle"></i> About Speedle</a></li>
+                    <li><a href="#" data-close-menu="true"><i class="fas fa-envelope"></i> Contact</a></li>
+                    <li><a href="#" data-close-menu="true"><i class="fas fa-handshake"></i> Become a Partner</a></li>
+                </ul>
+            </li>
+
+            <!-- CTA - Regular link -->
+            <li class="mobile-nav-item">
+                <a href="#" class="cta mobile-cta" data-close-menu="true">
+                    <i class="fas fa-rocket"></i> Partner with Speedle
+                </a>
+            </li>
+        </ul>
     </div>
+    <!-- nav end here -->
+    <!-- PAGE CONTENT -->
+    <main>
+        <!-- hero starts here -->
 
-    <!-- Hero Section with Visual Content -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Bring Time Control to Your Service Station</h1>
-                <div class="hero-tagline">Your Car, Our Care</div>
-                <p>Reduce waiting. Use idle hours better. Plan your day with confidence.</p>
-                <p>Speedle helps service stations manage customer flow using intelligent fixed time slots.</p>
-                <div class="hero-cta">
-                    <a href="#problems" class="btn">Discover How Speedle Helps <i class="fas fa-arrow-down"></i></a>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>
+                        <span class="gradient-text">More Customers for Stations.</span><br>
+                        <span class="highlight">Zero Waiting for</span> Drivers
+                    </h1>
+
+                    <p class="lead">
+                        Book a professional car wash near you in seconds.
+                        No waiting. Trusted stations. Transparent pricing.
+                    </p>
+
+                    <div class="hero-actions">
+                        <button class="btn-primary">Book a Wash Now</button>
+                        <a href="#" class="btn-secondary">See How It Works</a>
+                    </div>
+
+
                 </div>
             </div>
+        </section>
 
-            <div class="hero-visual">
-                <img src="https://github.com/thisizasif/Speedle/blob/main/ChatGPT%20Image%20Jan%2011,%202026,%2011_39_04%20PM.png?raw=true"
-                    alt="Professional car service station with modern equipment">
-                <div class="hero-visual-overlay">
-                    <div class="hero-visual-caption">
-                        Transform your service station operations with speedle
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- Problems Stations Face (Visual Layout) -->
-    <section id="problems">
-        <div class="container">
-            <h2>Every Service Station Faces Unique Challenges</h2>
-            <p class="section-subtitle">Understanding your daily struggles helps us build better solutions for your
-                business</p>
+        <!-- hero ends here -->
 
-            <div class="problems-grid">
-                <!-- Problem 1: Busy Stations -->
-                <div class="problem-item">
-                    <div class="problem-image">
-                        <img src="https://github.com/thisizasif/Speedle/blob/main/src/busy%20wash.png?raw=true"
-                            alt="Busy car service station with long queue">
-                    </div>
-                    <div class="problem-content">
-                        <div class="problem-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <h3>Busy Stations</h3>
-                        <p>Overwhelmed with customers but losing business due to long waits</p>
-                        <ul class="problem-list">
-                            <li>Long queues frustrate customers</li>
-                            <li>Customers leave without service</li>
-                            <li>Chaotic rush periods strain staff</li>
-                        </ul>
-                    </div>
-                </div>
+        <!-- how it works starts here -->
 
-                <!-- Problem 2: Low or Irregular Flow (Your Requested Layout) -->
-                <div class="problem-item reverse">
-                    <div class="problem-image">
-                        <img src="https://github.com/thisizasif/Speedle/blob/main/src/ChatGPT%20Image%20Jan%2012,%202026,%2003_26_41%20PM.png?raw=true"
-                            alt="Empty service station with idle staff">
-                    </div>
-                    <div class="problem-content">
-                        <div class="problem-icon">
-                            <i class="fas fa-user-clock"></i>
-                        </div>
-                        <h3>Low or Irregular Flow</h3>
-                        <p>Unpredictable customer visits leading to wasted resources</p>
-                        <ul class="problem-list">
-                            <li>Staff idle during empty hours</li>
-                            <li>Unused capacity affects revenue</li>
-                            <li>Unstable daily income</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Problem 3: Mixed Flow Stations -->
-                <div class="problem-item">
-                    <div class="problem-image">
-                        <img src="https://github.com/thisizasif/Speedle/blob/main/src/flow.png?raw=true"
-                            alt="Service station with mixed customer flow">
-                    </div>
-                    <div class="problem-content">
-                        <div class="problem-icon">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <h3>Mixed Flow Stations</h3>
-                        <p>Peak rush followed by empty hours - the worst of both worlds</p>
-                        <ul class="problem-list">
-                            <li>Overwhelmed during peak times</li>
-                            <li>No customers during off-peak</li>
-                            <li>No effective daily planning</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <!-- Problem 4: Walk-in Only Stations -->
-                <div class="problem-item reverse">
-                    <div class="problem-image">
-                        <img src="https://github.com/thisizasif/Speedle/blob/main/src/walk%20ins.png?raw=true"
-                            alt="Service station relying on random walk-in customers">
-                    </div>
-                    <div class="problem-content">
-                        <div class="problem-icon">
-                            <i class="fas fa-walking"></i>
-                        </div>
-                        <h3>Walk-in Only Stations</h3>
-                        <p>Complete reliance on random customer visits</p>
-                        <ul class="problem-list">
-                            <li>No control over timing</li>
-                            <li>Can't predict daily workload</li>
-                            <li>Miss repeat customer opportunities</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- What Speedle Does (Visual Grid) -->
-    <section id="solutions" style="background-color: #f8fafc;">
-        <div class="container">
-            <h2>How Speedle Transforms Your Station</h2>
-            <p class="section-subtitle">Simple, effective solutions tailored to service station operations</p>
-
-            <div class="solution-grid">
-                <!-- Solution 1 -->
-                <div class="solution-card">
-                    <div class="solution-image">
-                        <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Digital calendar with scheduled appointments">
-                    </div>
-                    <div class="solution-card-content">
-                        <div class="solution-card-icon">
-                            <i class="fas fa-calendar-alt"></i>
-                        </div>
-                        <h3>Fixed Time Slot System</h3>
-                        <p>Customers book specific time slots in advance, eliminating guesswork and random walk-ins.</p>
-                        <div class="solution-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Predictable scheduling for better planning</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Solution 2 -->
-                <div class="solution-card">
-                    <div class="solution-image">
-                        <img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Efficient time management concept">
-                    </div>
-                    <div class="solution-card-content">
-                        <div class="solution-card-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <h3>Fill Idle Hours Automatically</h3>
-                        <p>Our smart system fills empty time slots with pre-booked customers to maximize resource
-                            utilization.</p>
-                        <div class="solution-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Better staff and resource utilization</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Solution 3 -->
-                <div class="solution-card">
-                    <div class="solution-image">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Data analytics dashboard">
-                    </div>
-                    <div class="solution-card-content">
-                        <div class="solution-card-icon">
-                            <i class="fas fa-chart-bar"></i>
-                        </div>
-                        <h3>Manage Peak Times Efficiently</h3>
-                        <p>Control rush periods by spacing out appointments while maintaining walk-in capacity.</p>
-                        <div class="solution-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Reduced customer wait times</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Solution 4 -->
-                <div class="solution-card">
-                    <div class="solution-image">
-                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                            alt="Organized workflow system">
-                    </div>
-                    <div class="solution-card-content">
-                        <div class="solution-card-icon">
-                            <i class="fas fa-calendar-check"></i>
-                        </div>
-                        <h3>Predictable Daily Operations</h3>
-                        <p>Know exactly how many customers to expect and when, for better planning and staffing.</p>
-                        <div class="solution-feature">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Stable daily workflow</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section id="how-it-works">
-        <div class="container">
-            <h2>Simple Three-Step Process</h2>
-            <p class="section-subtitle">Easy implementation with immediate results</p>
-
-            <div class="steps-container">
-                <div class="step-connector"></div>
-
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h4>You Set Available Slots</h4>
-                        <p>Define your available time slots based on your station's capacity and staffing.</p>
-                        <div class="step-icon">
-                            <i class="fas fa-sliders-h"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h4>Customers Choose Times</h4>
-                        <p>Nearby customers see your available slots and book convenient times in advance.</p>
-                        <div class="step-icon">
-                            <i class="fas fa-mouse-pointer"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h4>Service Happens as Planned</h4>
-                        <p>Customers arrive at scheduled times, ensuring smooth operations and reduced waiting.</p>
-                        <div class="step-icon">
-                            <i class="fas fa-tasks"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Nearby Customer Visibility -->
-    <section style="background-color: #f8fafc;">
-        <div class="container">
-            <h2>Automatic Local Visibility</h2>
-            <p class="section-subtitle">Reach the right customers at the right time</p>
-
-            <div class="location-card">
-                <div class="location-visual">
-                    <img src="https://images.unsplash.com/photo-1542744095-fcf48d80b0fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
-                        alt="Map showing service station location and nearby customers">
-                </div>
-                <div class="location-content">
-                    <h3>Get Nearby Customers Automatically</h3>
-                    <p>Your station is listed with correct address and location, so nearby customers can easily find and
-                        book your services.</p>
-
-                    <div class="benefits-grid" style="margin-top: 30px; grid-template-columns: 1fr;">
-                        <div class="benefit-item"
-                            style="text-align: left; padding: 20px; background: transparent; box-shadow: none;">
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <div class="benefit-icon"
-                                    style="background-color: #fef3c7; margin: 0; width: 50px; height: 50px;">
-                                    <i class="fas fa-bullseye" style="color: #d97706;"></i>
-                                </div>
-                                <div>
-                                    <h4 style="margin: 0 0 8px 0;">Targeted Visibility</h4>
-                                    <p style="margin: 0; font-size: 1rem;">Shown only to customers in your service area
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="benefit-item"
-                            style="text-align: left; padding: 20px; background: transparent; box-shadow: none;">
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <div class="benefit-icon"
-                                    style="background-color: #e0e7ff; margin: 0; width: 50px; height: 50px;">
-                                    <i class="fas fa-filter" style="color: #4f46e5;"></i>
-                                </div>
-                                <div>
-                                    <h4 style="margin: 0 0 8px 0;">Relevant Traffic</h4>
-                                    <p style="margin: 0; font-size: 1rem;">No random visitors, only serious customers
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="benefit-item"
-                            style="text-align: left; padding: 20px; background: transparent; box-shadow: none;">
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <div class="benefit-icon"
-                                    style="background-color: #dcfce7; margin: 0; width: 50px; height: 50px;">
-                                    <i class="fas fa-shield-alt" style="color: #16a34a;"></i>
-                                </div>
-                                <div>
-                                    <h4 style="margin: 0 0 8px 0;">Privacy Protected</h4>
-                                    <p style="margin: 0; font-size: 1rem;">Location used only for relevant matching</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="trust-badge">
-                        <i class="fas fa-lock"></i>
-                        <span>Location is used only to show nearby stations. No live tracking of customers or
-                            stations.</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Benefits for Partners -->
-    <section id="benefits">
-        <div class="container">
-            <h2>What You Gain with Speedle</h2>
-            <p class="section-subtitle">Tangible benefits for your service station business</p>
-
-            <div class="benefits-grid">
-                <div class="benefit-item">
-                    <div class="benefit-icon">
-                        <i class="fas fa-users-slash"></i>
-                    </div>
-                    <h4>Reduced Crowding</h4>
-                    <p>Eliminate chaotic waiting areas and create a calmer environment for customers and staff.</p>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-icon" style="background-color: #fef3c7;">
-                        <i class="fas fa-user-friends" style="color: #d97706;"></i>
-                    </div>
-                    <h4>Optimal Staff Use</h4>
-                    <p>Schedule staff efficiently based on confirmed appointments rather than guessing.</p>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-icon" style="background-color: #e0e7ff;">
-                        <i class="fas fa-chart-line" style="color: #4f46e5;"></i>
-                    </div>
-                    <h4>Predictable Income</h4>
-                    <p>Forecast daily revenue with greater accuracy through pre-booked appointments.</p>
-                </div>
-
-                <div class="benefit-item">
-                    <div class="benefit-icon" style="background-color: #fce7f3;">
-                        <i class="fas fa-smile" style="color: #db2777;"></i>
-                    </div>
-                    <h4>Satisfied Customers</h4>
-                    <p>Happy customers return and refer others, building your reputation and business.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- About Speedle -->
-    <section id="about" style="background-color: #f8fafc;">
-        <div class="container">
-            <h2>About Speedle</h2>
-            <div class="about-card">
-                <div class="about-visual">
-                    <img src="https://github.com/thisizasif/Speedle/blob/main/ChatGPT%20Image%20Jan%2011,%202026,%2011_39_04%20PM.png?raw=true"
-                        alt="Speedle team researching at a service station">
-                </div>
-                <h3>Built from Real Ground Experience</h3>
-                <p>Speedle Private Limited is an India-based company focused on solving real problems faced by service
-                    station owners.</p>
-                <p>Our platform is designed from extensive on-ground research and direct feedback from station owners
-                    across different regions and station types.</p>
-                <p style="margin-top: 30px; font-style: italic; color: var(--light-blue);">
-                    "We understand your challenges because we've spent time in your stations."
+        <section class="how-it-works">
+            <div class="container">
+                <h2>How Speedle Works</h2>
+                <p class="section-subtitle">
+                    Book your car wash in just three simple steps
                 </p>
+
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <h4>Choose Location</h4>
+                        <p>Find nearby trusted car wash stations</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <h4>Select Time Slot</h4>
+                        <p>Pick a convenient date and time</p>
+                    </div>
+
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <h4>Wash & Relax</h4>
+                        <p>Arrive on time. We handle the rest</p>
+                    </div>
+                </div>
             </div>
+        </section>
+
+
+        <!-- how it works ends here -->
+
+        <!-- problem section starts here -->
+
+        <section class="problems">
+            <div class="container">
+                <h2>The Problem Today</h2>
+                <p class="section-subtitle">
+                    Car wash services struggle on both sides
+                </p>
+
+                <div class="problem-grid">
+                    <div class="problem">
+                        <h4>No Customers</h4>
+                        <p>Wash stations stay idle due to poor visibility</p>
+                    </div>
+
+                    <div class="problem">
+                        <h4>Overcrowded Stations</h4>
+                        <p>Some locations get too busy while others are empty</p>
+                    </div>
+
+                    <div class="problem">
+                        <h4>Long Waiting Time</h4>
+                        <p>Customers waste time standing in queues</p>
+                    </div>
+
+                    <div class="problem">
+                        <h4>No Management System</h4>
+                        <p>No slot control, no data, no optimization</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- problme section ends here -->
+
+        <!-- solution section starts here -->
+
+        <section class="solution">
+            <div class="container">
+                <h2>The Speedle Solution</h2>
+                <p class="section-subtitle">
+                    One platform that fixes everything
+                </p>
+
+                <div class="solution-grid">
+                    <div class="solution-item">
+                        <h4>More Customers</h4>
+                        <p>Digital discovery brings demand to idle stations</p>
+                    </div>
+
+                    <div class="solution-item">
+                        <h4>Balanced Load</h4>
+                        <p>Smart slot booking distributes traffic evenly</p>
+                    </div>
+
+                    <div class="solution-item">
+                        <h4>No Waiting</h4>
+                        <p>Customers arrive exactly at their booked time</p>
+                    </div>
+
+                    <div class="solution-item">
+                        <h4>Complete Management</h4>
+                        <p>Slots, payments, data, and performance insights</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- solution section ends here -->
+
+        <!-- footer section starts here -->
+
+        <!-- Footer Section -->
+        <footer class="footer">
+            <div class="container">
+                <!-- Top Section -->
+                <div class="footer-top">
+                    <div class="footer-brand">
+                        <a href="/" class="footer-logo">
+                            <span class="logo-speed">speed</span><span class="logo-le">le</span>
+                        </a>
+                        <p class="footer-tagline">Your Car, Our Care</p>
+                        <div class="footer-contact">
+                            <p><i class="fas fa-envelope"></i> SpeedlePvtLtd@gmail.com</p>
+                            <p><i class="fas fa-phone"></i> +91 60063 29805</p>
+                            <p><i class="fas fa-clock"></i> 24/7 Support</p>
+                        </div>
+                    </div>
+
+                    <div class="footer-links">
+                        <div class="link-group">
+                            <h4>Quick Links</h4>
+                            <ul>
+                                <li><a href="#">Home</a></li>
+                                <li><a href="#">How It Works</a></li>
+                                <li><a href="#">Solutions</a></li>
+                                <li><a href="#">Why Speedle</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="link-group">
+                            <h4>For You</h4>
+                            <ul>
+                                <li><a href="#">Book a Wash</a></li>
+                                <li><a href="#">Find Stations</a></li>
+                                <li><a href="#">Pricing</a></li>
+                                <li><a href="#">Customer Support</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="link-group">
+                            <h4>For Partners</h4>
+                            <ul>
+                                <li><a href="#">Become a Partner</a></li>
+                                <li><a href="#">Partner Dashboard</a></li>
+                                <li><a href="#">Station Resources</a></li>
+                                <li><a href="#">Partner Support</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle Section -->
+                <!-- <div class="footer-middle">
+      <div class="payment-methods">
+        <h4>We Accept</h4>
+        <div class="payment-icons">
+          <span class="payment-icon">💳</span>
+          <span class="payment-icon">📱</span>
+          <span class="payment-icon">💵</span>
+          <span class="payment-icon">🏦</span>
         </div>
-    </section>
+        <p class="payment-text">Cards • UPI • Cash • Net Banking</p>
+      </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-logo">Speedle</div>
-            <div class="footer-tagline">Your Car, Our Care</div>
+      <div class="partner-cta">
+        <a href="#" class="partner-btn">
+          <i class="fas fa-handshake"></i> Become a Partner
+        </a>
+        <p>Join India's fastest growing car wash network</p>
+      </div>
+    </div> -->
 
-            <div class="company-info">
-                <p>Speedle Private Limited</p>
-                <p>Intelligent Service Station Management Solutions</p>
-            </div>
+                <!-- Bottom Section -->
+                <div class="footer-bottom">
+                    <div class="copyright">
+                        <p>&copy; 2025 Speedle Private Limited. All rights reserved.</p>
+                        <div class="legal-links">
+                            <a href="#">Privacy Policy</a>
+                            <a href="#">Terms of Service</a>
+                            <a href="#">Cookie Policy</a>
+                        </div>
+                    </div>
 
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <span>SpeedlePvtLtd@gmail.com</span>
+                    <div class="footer-social">
+                        <p>Follow us:</p>
+                        <div class="social-icons">
+                            <!-- Add your social media links when available -->
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        </div>
+                    </div>
                 </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <span>+91 60063 29805</span>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <span>India</span>
-                </div>
             </div>
+        </footer>
+        <!-- footer section ends here -->
+    </main>
 
-            <div class="disclaimer">
-                For information purposes only. This website explains what Speedle is and how it helps service
-                stations.<br>
-                No booking, login, pricing, or signup functionality is available here.
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Enhanced Carousel System for Problems
-        class VisualCarousel {
-            constructor(carouselId, options = {}) {
-                this.carousel = document.getElementById(carouselId);
-                this.slides = this.carousel ? this.carousel.children : [];
-                this.slideCount = this.slides.length;
-                this.currentSlide = 0;
-                this.isTransitioning = false;
-                this.autoPlayInterval = null;
-
-                // Options
-                this.autoPlay = options.autoPlay || false;
-                this.interval = options.interval || 5000;
-
-                if (this.carousel) {
-                    this.init();
-                }
-            }
-
-            init() {
-                if (this.slideCount > 1 && this.autoPlay) {
-                    this.startAutoPlay();
-                }
-            }
-
-            goToSlide(index) {
-                if (this.isTransitioning || !this.carousel) return;
-
-                if (index < 0) {
-                    index = this.slideCount - 1;
-                } else if (index >= this.slideCount) {
-                    index = 0;
-                }
-
-                this.currentSlide = index;
-                this.updateCarousel();
-            }
-
-            next() {
-                this.goToSlide(this.currentSlide + 1);
-            }
-
-            prev() {
-                this.goToSlide(this.currentSlide - 1);
-            }
-
-            updateCarousel() {
-                if (this.isTransitioning || !this.carousel) return;
-
-                this.isTransitioning = true;
-
-                // Move carousel
-                this.carousel.style.transform = `translateX(-${this.currentSlide * 100}%)`;
-                this.carousel.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
-
-                // Reset transitioning flag
-                setTimeout(() => {
-                    this.isTransitioning = false;
-                }, 500);
-            }
-
-            startAutoPlay() {
-                this.autoPlayInterval = setInterval(() => {
-                    this.next();
-                }, this.interval);
-            }
-
-            pauseAutoPlay() {
-                if (this.autoPlayInterval) {
-                    clearInterval(this.autoPlayInterval);
-                }
-            }
-
-            resumeAutoPlay() {
-                if (this.autoPlay) {
-                    this.startAutoPlay();
-                }
-            }
-        }
-
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', () => {
-            // Initialize carousel if exists
-            const problemsCarousel = document.getElementById('problems-carousel');
-            if (problemsCarousel) {
-                new VisualCarousel('problems-carousel', {
-                    autoPlay: true,
-                    interval: 6000
-                });
-            }
-
-            // Smooth scrolling for anchor links
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function (e) {
-                    e.preventDefault();
-
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-
-                    const targetElement = document.querySelector(targetId);
-                    if (targetElement) {
-                        window.scrollTo({
-                            top: targetElement.offsetTop - 80,
-                            behavior: 'smooth'
-                        });
-
-                        // Close mobile menu if open
-                        const overlay = document.querySelector('.sp-nav__overlay');
-                        if (overlay.classList.contains('active')) {
-                            toggleMenu();
-                        }
-                    }
-                });
-            });
-
-            // Add scroll animation for elements
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            };
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('fade-in');
-                    }
-                });
-            }, observerOptions);
-
-            // Observe elements for animation
-            document.querySelectorAll('.problem-item, .solution-card, .step-content, .benefit-item').forEach(el => {
-                observer.observe(el);
-            });
-
-            // Preload important images
-            const preloadImages = () => {
-                const imageUrls = [
-                    'https://images.unsplash.com/photo-1551524165-6b6e3d616895?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80',
-                    'https://images.unsplash.com/photo-1518458028785-8fbcd101ebb9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-                    'https://images.unsplash.com/photo-1586281380349-632531db7ed4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'
-                ];
-
-                imageUrls.forEach(url => {
-                    const img = new Image();
-                    img.src = url;
-                });
-            };
-
-            // Start preloading
-            setTimeout(preloadImages, 1000);
-        });
-
-        // Mobile Menu Functionality
-        (function () {
-            const hamburgers = document.querySelectorAll(".sp-nav__hamburger");
-            const overlay = document.querySelector(".sp-nav__overlay");
-
-            function toggleMenu() {
-                const isOpen = overlay.classList.toggle("active");
-                hamburgers.forEach(btn => {
-                    btn.classList.toggle("active", isOpen);
-                    btn.setAttribute("aria-expanded", isOpen);
-                });
-                overlay.setAttribute("aria-hidden", !isOpen);
-            }
-
-            hamburgers.forEach(btn => {
-                btn.addEventListener("click", toggleMenu);
-            });
-        })();
-    </script>
+    <script src="script.js"></script>
 </body>
 
 </html>
